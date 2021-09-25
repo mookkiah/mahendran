@@ -5,9 +5,11 @@ date:   2021-09-25 03:25:00 -0400
 categories: jekyll update
 ---
 
-# Welcome to Mahendran's Notes
+# Hello World!
+
+It is exciting to share what what I learned.
+
+Knowledge is the only thing which increases when shared with others.
 
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+
