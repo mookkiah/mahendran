@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Intercepting Kubernetes container to make changes temporarily"
-date:   2021-09-25 03:51:00 -0400
+date:   2021-09-25 15:51:00 -0400
 categories: jekyll update
 ---
 
@@ -12,6 +12,16 @@ When working with Kubernetes, at times we may need make few changes to the envir
 ## Assumption
 Lets assume you are using a docker image which has `CMD` as  `/app/entrypoint.sh` 
 
+## How to
+In Kubernetes container specification, set/add command and argument as below
+```
+command: ["/bin/sh"]
+args: ["-c", "while [ ! -f /tmp/continue ]; do echo waiting...; sleep 5; done; /path/to/entrypoint.sh"]
+```
+
+This makes the container to wait in a loop until it finds the file `/tmp/continue` present.
+
+After making the change which you planned, create a file inside the container using `touch /tmp/continue` command.
 
 
 
