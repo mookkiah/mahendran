@@ -1,1 +1,16 @@
-theme: jekyll-theme-leap-day
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
+
+title: Mahendran's Notes
+email: mahendran.mookkiah@gmail.com
+description: >- 
+  It's personal site to share the learnings, tips, tricks with you. 
+  I am confident that these notes will help me later and avoids another search or fresh start.
+  Please contact if you liked any specific posts which I can add more content around it.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://mm-notes.com" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: mmookkiah
+github_username: mookkiah
