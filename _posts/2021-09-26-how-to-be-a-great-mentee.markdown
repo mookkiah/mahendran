@@ -6,11 +6,11 @@ categories: jekyll update
 ---
 
 
-During school days, we followed discipline and gave much respect to teachers. Teachers are the one who wants to see their students to gain more knowledge than they dream about grow us better than themselves. They always proud of saying "That is my student!!!".
+During school days, we followed discipline and gave much respect to teachers. Teachers are the one who wants to see their students to gain more knowledge and  dream about grow better than themselves. They always proud of saying "That is my student!!!".
 
 Once we are out of school, we started forgetting about how to respect someone who shares their knowledge more importantly their time to groom us better.
 
-A mentor enjoys the opportunity to share experience, wisdom, and knowledge while a mentee shows interest to gain a foundation for building skills and meeting goals. 
+A mentor is someone who enjoys the opportunity to share their experience, wisdom, and knowledge to build foundation for their mentee meet the goals. 
 
 ## Who are our mentors
 After schooling we all find a mentors either by assignment (supervisor/manager) or by knowing someone doing great at their work (role model / expert). Sometime we find mentors who are popular and try to practice their style. Maybe we may work with a paid mentors like health advisor, financial advisor or career coach.
@@ -39,7 +39,7 @@ Formal mentor is someone we
 Here are my learning on how to be a great mentee while working with formal mentor so you can give them the same happiness our teachers had.
 
 ### Ground rules for working with formal mentor:
-Have these ground rules and follow them as much as you can.
+To get most out of your mentors time and to become a better mentee, have these ground rules and follow them as much as you can.
 
 I will ...
 - be prepared for my meetings
@@ -63,18 +63,17 @@ Always remember your mentor's time is more valuable than your's. Here are few ti
 	- Dress appropriately
 	- Be concise and stay on task
 	- Don't talk over your mentor
-	- Don't be rude to others
 	- Food is not the focus
-	- Don't let your eyes drift - Make sure your body language says you are there and you are into it. Eye contact.
+	- Don't let your eyes drift - Make sure your body language says you are there and you are into it.
 	- Stay until the end
 - Active listening
-	- Appropriate eye contact
-	- Effective note taking
-	- Summary of main points
+    - Listen more and talk less
+	- Take notes effectively
+	- Summary the main points
 	- Summarize action items
 
 
-## Never frustrate your mentor
+## Never ever frustrate your mentor
 You may have seen doctor office posters stating these...
 - I don't understand why are you paying me to give advices which you don't follow.
 - If you believe your google search is giving better solution to your health problems, why are you here? 
