@@ -61,7 +61,7 @@ Always remember your mentor's time is more valuable than your's. Here are few ti
 	- DO NOT check your phone
 	- Be present
 	- Dress appropriately
-	- Be concise and stay on -task
+	- Be concise and stay on task
 	- Don't talk over your mentor
 	- Don't be rude to others
 	- Food is not the focus
