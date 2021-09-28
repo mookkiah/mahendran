@@ -12,12 +12,12 @@ Once we are out of school, we started forgetting about how to respect someone wh
 
 A mentor enjoys the opportunity to share experience, wisdom, and knowledge while a mentee shows interest to gain a foundation for building skills and meeting goals. 
 
-## How we find a mentor
+## Who are our mentors
 After schooling we all find a mentors either by assignment (supervisor/manager) or by knowing someone doing great at their work (role model / expert). Sometime we find mentors who are popular and try to practice their style. Maybe we may work with a paid mentors like health advisor, financial advisor or career coach.
 
 We can categorize these mentors into two types - formal mentor and informal mentor.
 
-## Informal Mentor
+## Informal mentor
 Informal mentor someone we...
 - might not know in person
 - don't meet regularly
@@ -29,7 +29,7 @@ There is not much to follow when having informal mentor except following their p
 We may recommend other friends to follow them.
 
 
-## Formal Mentor
+## Formal mentor
 Formal mentor is someone we
 - know and respect them well
 - know about and agrees with expectations
@@ -74,12 +74,12 @@ Always remember your mentor's time is more valuable than your's. Here are few ti
 	- Summarize action items
 
 
-
-I have seen doctor office posters stating these...
+## Never frustrate your mentor
+You may have seen doctor office posters stating these...
 - I don't understand why are you paying me to give advices which you don't follow.
 - If you believe your google search is giving better solution to your health problems, why are you here? 
 
-These are the sample frustration when a mentee is not following the mentor. Don't let your mentor have similar thoughts.
+These appears funny but it could be sample frustration when a mentee is not following the mentor. Don't let your mentor have similar thoughts.
 
 ## Closing comment
 Be thankful for having a mentor and respect them as if they are your teacher and who can help set foundation for your growth. Show your respect and have them proud of you by following the meeting etiquette and listening actively. Remember it is hard to find good mentor like your favorite teacher but easy to miss one.
