@@ -109,7 +109,7 @@ spec:
 
 ```
 
-To find the external IP for accessing webdav url - http://<EXTERNAL-IP>:8080/
+To find the external IP for accessing webdav url - http://&lt;EXTERNAL-IP&gt;:8080/
 ```
 kubectl get service webdav-service
 ```
