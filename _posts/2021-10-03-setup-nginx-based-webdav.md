@@ -96,7 +96,8 @@ spec:
     spec:
       containers:
       # Forcing specific version of image as it is from public and untrusted. 
-      - image: mookkiah/docker-webdav@sha256:09ed43d30aa2e31590998c76a734efc7470a1086b874acbe4bb7a4839b9fb65e
+      # Example: mookkiah/docker-webdav@sha256:4428b3276860eba53ccfb4c93903957fc7f126bed216c65785cbf26146ee1072
+      - image: mookkiah/docker-webdav:v0.0.2
         name: webdav
         env:
         - name: WEBDAV_USERNAME
