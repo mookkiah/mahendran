@@ -19,6 +19,7 @@ It is easy to find organization provided by shared file server which employees c
 ### Pros:
 - Already exising
 - Easy to secure by AD
+
 ### Cons:
 - Not easy for system access
 - Need to mount
@@ -27,9 +28,11 @@ It is easy to find organization provided by shared file server which employees c
 
 ## Option 2: Persistent Volume Claim (PVC)
 This is Kubernetes recommended way to persiste files which you dont want to loose on container restart.
+
 ### Pros:
 - Easy to setup
 - Can share the storage with multiple application (pods)
+
 ### Cons:
 - Not easy to get human access unless having another server to publish the content of PVC
 - Can't share the storage outside namespace unless underlying PersistentVolume shared outside of Kubernetes context.
@@ -42,23 +45,29 @@ We can have AWS storage bucket or Google cloud storage which are available as pa
 - Secure
 - Can be shared across multiple namespaces
 - Easy to access by human by cloud web interfaces
+
 ### Cons:
 - Not free
 - Mixing on-prem and cloud solutions
 
 ## Option 4: Setup a webdav using NGINX
-Webdav is a http based solution which allows clients to store and retrieve files. Webdav supported by many webservers (ex: Apache HTTPD, NGINX). 
+Webdav is a http based solution which allows clients to store and retrieve files. Webdav supported by many webservers (ex: Apache HTTPD, NGINX).
+
 ### Pros:
 - http based
 - can be secure by transport(https) and authentication(basic)
 - both accessible by system and human
+
 ### Cons:
 - Maybe slow
+
 ## Option 5: FTP or SCP
 These are alternative to windows file share and webdav
+
 ### Pros:
 - Easy to get from infrastructure team
 - Secure
+
 ### Cons:
 - May need firewall setup
 - Needs client installed in container.
@@ -99,11 +108,13 @@ spec:
 
 ```
 
-# To find the external IP for accessing webdav url - http://<EXTERNAL-IP>:8080/
+To find the external IP for accessing webdav url - http://<EXTERNAL-IP>:8080/
 ```
 kubectl get service webdav-service
 ```
-# Incase of external ip not set of not reachable, use port-forward to continue the development and ask for kubernetes adminster help.
+
+Incase of external ip not set of not reachable, use port-forward to continue the development and ask for kubernetes adminster help.
+
 ```
 kubectl port-forward svc/webdav-service 8080:8080 
 ```
