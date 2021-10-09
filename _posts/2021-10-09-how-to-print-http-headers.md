@@ -24,7 +24,7 @@ For example
 
  In this blog let us see how to log these information with minimal effort and without touching application code/artifact/configuration.
 
- ## Tomcat
+## Tomcat
 Tomcat and few application servers (JBoss, TomEE) which is based on tomcat has `server.xml` which configures the web server engine and many Valves/Filters which request can flow through before hitting the application.
 
 These are easy to configure and has separate log file called `access.log` to investigate the incoming request
