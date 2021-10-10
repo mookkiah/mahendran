@@ -361,7 +361,7 @@ mahendran@mm-lab ~ % ./keytool_import_all.sh untrusted-root.badssl.com.crt chang
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-System.setProperty("javax.net.ssl.trustStore", "/Users/mahendran/cacerts-with-badssl");
+System.setProperty("javax.net.ssl.trustStore", System.getProperty("user.home")+"/cacerts-with-badssl");
 System.setProperty("javax.net.ssl.trustStorePassword","changeit");
 System.setProperty("javax.net.debug", "all");
 var request = HttpRequest.newBuilder(URI.create("https://untrusted-root.badssl.com/")).GET().build();
