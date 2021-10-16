@@ -11,11 +11,12 @@ When working with web application which has functionalities based on http header
 For example
  - We want to know what is the real IP of the client
  - We want to know the request came as http or https
- - What is the IP of previous network component (ex: LoadBalancer or proxy) which routes the request.
+ - What is the IP of previous network component (X-Forwarded-For) which routes the request.
  - What is the client agent (browser type or application)
  - What is the content type and length
  - What is the response code returned by the web server
  - What are the cookies present in the request
+ - What is the header value of (route, JSESSIONID) which plays critical role in traffic routing
 
 
  Ofcourse we can ask the application developer to print all the details in the application log.
@@ -84,6 +85,15 @@ log_format upstreaminfo '$remote_addr - $request_id - $http_x_forwarded_for - [$
 access_log /var/log/nginx/access.log upstreaminfo if=$loggable;
 ```
 
+All the cookies are assigned to individual variable with prefix `$cookie_` followed by actual cooki name.
+For example you want to print the cookie with name `route` and `JESSSIONID`, you can do by inserting this into logformat
+```
+[$cookie_route - $cookie_JSESSIONID]
+```
+
+Most repositories I've been a part of use the blockquote to simulate an admonition:
+
+> **WARNING**: Do not log JSESSIONID for production as it will open loophole for session fixation attack.
 
 ## Nginx Controller
 Nginx controller configures Nginx server dynamically based on the cloud native services.
@@ -108,6 +118,31 @@ With  log-format-upstream
 174.20.2.111 - 4f64a008d5e06a120b1673a9018a2557 - 73.192.109.108 - [73.192.109.108, 174.20.2.111] - - [06/Oct/2021:06:56:06 +0000] "GET / HTTP/1.1" 302 138 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.101 Safari/537.36" 1092 0.000 [-] - - - -
 174.20.2.118 - 2cf9dc47a0bbbcf9c14dd18fd0261248 - - - [174.20.2.118] - - [06/Oct/2021:06:50:39 +0000] "GET / HTTP/1.1" 302 138 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36" 1033 0.000 [-] - - - -
 ```
+
+
+### Nginx Print All headers
+There is no straight forward configuration to do this, you nginx allows us to script using lua block
+
+```
+header_filter_by_lua_block {
+      local h = ngx.req.get_headers()
+      for k, v in pairs(h) do
+        ngx.log(ngx.ERR, "Header "..k..": "..toString(v)..";")
+      end
+    }
+    set_by_lua_block $request_headers{
+      local h = ngx.req.get_headers()
+      local request_headers_all = ""
+      for k, v in pairs(h) do
+        local rowtext = ""
+        rowtext = string.format("[%s %s]\n", k, v)
+        request_headers_all = request_headers_all .. rowtext
+
+      end
+      return request_headers_all
+    }
+```
+> **WARNING**: Do not log all the headers as it will open many security loophole and violating PII, GDPR regulations.
 
 <!---
 ## Trafik
