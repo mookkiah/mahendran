@@ -29,7 +29,7 @@ stable/odavid/my-bloody-jenkins                 0.1.161                 2.289.1-
 stable/stable/jenkins                           2.5.4                   lts             DEPRECATED - Open source continuous integration...
 stable/stakater/jenkins                         0.21.0                  2.121.3         Open source continuous integration server. It s...
 stable/cloudbees/cloudbees-core                 3.32.1+7d1cefcdc2b8     2.289.1.2       Enterprise Continuous Integration with Jenkins    
-(⎈ |iah-east:default)MBP-MM:mahendran mookkiahm$
+
 ```
 
 Even though you find many charts, we are going to use `stable/jenkins` with version 8.0.11.
