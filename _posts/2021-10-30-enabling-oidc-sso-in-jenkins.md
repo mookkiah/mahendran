@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Configuring Jenkins with OIDC based SSO"
-date:   2021-10-30 8:431:00  -0400
+date:   2021-10-30 8:31:00 -0400
 categories: security oidc
 ---
 
