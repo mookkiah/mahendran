@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Email Addresses validation"
-date:   2021-31-10 05:21:00 -0400
+title: "Email Addresses validation"
+date: 2021-10-31 05:21:00 -0400
 categories: blog email-validation
 ---
 
@@ -86,3 +86,8 @@ Defining requirement is somewhat easy, but it is very complex to find ways to va
 
 ### Maintaining Do-Not-Email list - Safely
 
+
+## Real open source implementation
+I do follow the princible of `don't develop what you can download` (ofcourse from legitmate source). When I look for docker image which we could use as email address validator as REST service, I did not find one at this time of writing. Maybe not looked properly, please comment(Ah!, I have to find how to get comments on github pages :smile: ) if you find one. 
+
+So decided to write one and use the opportunity to learn a new web programming language.
