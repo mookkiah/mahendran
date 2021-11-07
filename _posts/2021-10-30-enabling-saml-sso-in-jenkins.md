@@ -73,11 +73,11 @@ Under `Security Realm` select `SAML 2.0`
 When Jenkins not perfomring global logout, it will present a message like this to warn you 
 
 
-<img src="assets/saml-local-logout-1.png">
+<img src="/assets/images/dont-runaway.png">
 
 When you click login it will warn us so we know next time
 
-<img src="assets/saml-local-logout-2.png">
+<img src="/assets/images/only-local-logout.png">
 
 Ask your IDP provider for logout url. For example for [Gluu](https://gluu.org/docs/gluu-server/4.0/operation/logout/#saml-logout) it is something like `https://[idp-hostname]/idp/Authn/oxAuth/logout`
 
