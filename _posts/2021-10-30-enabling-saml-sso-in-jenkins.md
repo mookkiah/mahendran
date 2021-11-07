@@ -10,7 +10,7 @@ I needed a SAML SP which supports SingleLogOut(SLO)
 
 ## Pre-requsite
 - Jenkins
-  - If you don't have one spin up one quickly - Use [this blog](https://mm-notes.com) if you have Kubernetes
+  - If you don't have one spin up one quickly - Use [this post]({% link _posts/2021-10-30-jenkins-in-kubernetes.md  %}) if you have Kubernetes
 - SAML IDP (we will use samltest.id for keep the document light)
 
 
