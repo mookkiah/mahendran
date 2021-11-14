@@ -49,3 +49,8 @@ wget --no-check-certificate  https://self-signed.badssl.com/
 ```
 npm set strict-ssl false
 ```
+
+### kubectl
+```
+kubectl --insecure-skip-tls-verify get namespaces
+```

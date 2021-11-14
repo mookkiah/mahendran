@@ -55,6 +55,47 @@ installer: The upgrade was successful.
 mahendran@mm-lab mahendran % 
 ```
 
+
+## Unistalling JDK
+We may have installed JDK using different ways. Meaning `manually` download dmg and install, via `brew install` command or via `brew cask install`
+To see if it is installed using brew, use `brew list` command.
+To view details about a package `brew info <package>` command
+
+```
+$ brew list
+adoptopenjdk11  
+$ brew info adoptopenjdk11
+adoptopenjdk11: 11.0.9.1,1
+https://adoptopenjdk.net/
+/usr/local/Caskroom/adoptopenjdk11/11.0.5,10 (180.3MB)
+From: https://github.com/adoptopenjdk/homebrew-openjdk/blob/HEAD/Casks/adoptopenjdk11.rb
+==> Name
+AdoptOpenJDK 11
+==> Description
+AdoptOpenJDK OpenJDK (Java) Development Kit
+==> Artifacts
+OpenJDK11U-jdk_x64_mac_hotspot_11.0.9.1_1.pkg (Pkg)
+```
+
+
+Once we know it is installed via brew, we can unistall using `brew uninstall <package>` command
+```
+$ brew uninstall adoptopenjdk
+==> Uninstalling Cask adoptopenjdk
+==> Removing directories if empty:
+Warning: Skipping rmdir for undeletable path '/Library/Java/JavaVirtualMachines'.
+==> Backing Generic Artifact 'adoptopenjdk-12.0.1.jdk' up to '/usr/local/Caskroom/adoptopenjdk/12.0.1,12/jdk-12.0.1+12'.
+Password:
+==> Removing Generic Artifact '/Library/Java/JavaVirtualMachines/adoptopenjdk-12.0.1.jdk'.
+==> Purging files for version 12.0.1,12 of Cask adoptopenjdk
+```
+
+Uninstall will fail if any dependency on this package (formulae and casks) and you know what you are doing, you may need to force by ignoring dependencies
+```
+$ brew uninstall openjdk --ignore-dependencies
+Uninstalling /usr/local/Cellar/openjdk/15.0.1... (614 files, 324.0MB)
+```
+
 ## Next Reading Suggestion
 Got multiple java version - [setup a quick way to switch between java version]({% link _posts/2021-11-14-switching-jdk-version-quickly.md %})
 
