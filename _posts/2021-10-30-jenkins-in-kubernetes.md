@@ -45,7 +45,7 @@ I will be using  `--set` option to highlight the changes and easy to follow.
 export JENKINS_PASSWORD=YourFavoritePassword
 export RELEASE_NAME=jenkins
 
-helm upgrade -i $RELEASE_NAME stable/jenkins --version=8.0.11 -f values.yaml --set jenkinsPassword=$JENKINS_PASSWORD --debug
+helm upgrade -i $RELEASE_NAME stable/jenkins --version=8.0.11 --set jenkinsPassword=$JENKINS_PASSWORD --debug
 ```
 
 We will see instruction to access the jenkins as below
