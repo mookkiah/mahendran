@@ -56,5 +56,5 @@ mahendran@mm-lab mahendran %
 ```
 
 ## Next Reading Suggestion
-Got multiple java version - [setup a quick way to switch between java version]({% link _posts/2021-11-14-switching-jdk-version-quickly %})
+Got multiple java version - [setup a quick way to switch between java version]({% link _posts/2021-11-14-switching-jdk-version-quickly.md %})
 

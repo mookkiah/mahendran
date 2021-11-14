@@ -357,6 +357,7 @@ mahendran@mm-lab ~ % ./keytool_import_all.sh untrusted-root.badssl.com.crt chang
 ```
 
 
+
 ```
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -370,3 +371,9 @@ var body = client.send(request, HttpResponse.BodyHandlers.ofString());
 ```
 
     Note: untrusted-root.badssl.com not just holding untrusted cert, it is also missing to provide information about the CA which is blocking us to trust this site. This process should work when you have all intermediate CA certificate available in the certificate chain to add it to cacerts
+
+
+## List certs from Java cacerts
+```
+$ keytool -list -keystore cacerts -storepass changeit
+```
