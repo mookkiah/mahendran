@@ -34,6 +34,59 @@ parallels@ubuntu-linux-20-04-desktop:~$ sudo apt install openjdk-17-jdk
 
 
 ```
+
+if you get "Unable to locate package" error like this try `sudo apt update` ...
+```
+$ sudo apt install openjdk-17-jdk
+[sudo] password for subanitha: 
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+E: Unable to locate package openjdk-17-jdk
+$ sudo apt update
+Hit:1 http://us.archive.ubuntu.com/ubuntu xenial InRelease
+Get:2 http://dl.google.com/linux/chrome/deb stable InRelease [1,811 B]                                              
+Get:3 http://us.archive.ubuntu.com/ubuntu xenial-updates InRelease [109 kB]                                                                   
+Get:4 http://security.ubuntu.com/ubuntu xenial-security InRelease [109 kB]                                                                    
+Hit:5 http://download.virtualbox.org/virtualbox/debian xenial InRelease                                                   
+Hit:6 https://download.docker.com/linux/ubuntu xenial InRelease                                                    
+Get:7 http://us.archive.ubuntu.com/ubuntu xenial-backports InRelease [107 kB]                  
+Err:2 http://dl.google.com/linux/chrome/deb stable InRelease                                  
+  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 78BD65473CB3BD13
+Get:8 http://us.archive.ubuntu.com/ubuntu xenial-updates/main amd64 DEP-11 Metadata [327 kB]
+Get:9 http://us.archive.ubuntu.com/ubuntu xenial-updates/universe amd64 DEP-11 Metadata [281 kB]
+Get:10 http://us.archive.ubuntu.com/ubuntu xenial-updates/multiverse amd64 DEP-11 Metadata [5,956 B]
+Get:11 http://us.archive.ubuntu.com/ubuntu xenial-backports/main amd64 DEP-11 Metadata [3,328 B]      
+Get:12 http://us.archive.ubuntu.com/ubuntu xenial-backports/universe amd64 DEP-11 Metadata [6,608 B]
+Get:13 http://security.ubuntu.com/ubuntu xenial-security/main amd64 DEP-11 Metadata [93.7 kB]      
+Get:14 http://security.ubuntu.com/ubuntu xenial-security/universe amd64 DEP-11 Metadata [130 kB]
+Get:15 http://security.ubuntu.com/ubuntu xenial-security/multiverse amd64 DEP-11 Metadata [2,464 B]
+Reading package lists... Done                                                
+W: GPG error: http://dl.google.com/linux/chrome/deb stable InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 78BD65473CB3BD13
+E: The repository 'http://dl.google.com/linux/chrome/deb stable InRelease' is not signed.
+N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+N: See apt-secure(8) manpage for repository creation and user configuration details.
+$ uname -a
+Linux subanitha 4.15.0-142-generic #146~16.04.1-Ubuntu SMP Tue Apr 13 09:27:15 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+
+```
+
+Tried upgrading operating system... Failed & did not help
+```
+$ sudo apt upgrade # upgrading operating system - take backup if needed... - 
+;;;;
+W: Possible missing firmware /lib/firmware/i915/kbl_guc_ver9_14.bin for module i915
+W: Possible missing firmware /lib/firmware/i915/bxt_guc_ver8_7.bin for module i915
+Processing triggers for resolvconf (1.78ubuntu7) ...
+Processing triggers for dbus (1.10.6-1ubuntu3.6) ...
+;;;;
+
+$ uname -a
+Linux subanitha 4.15.0-142-generic #146~16.04.1-Ubuntu SMP Tue Apr 13 09:27:15 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux  
+
+```
+
+
 After install...
 ```
 parallels@ubuntu-linux-20-04-desktop:~$ java -version
