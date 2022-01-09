@@ -1,4 +1,5 @@
 ---
+---
 layout: post
 title: "Ubuntu - Scheduled power on and off"
 date: 2022-01-09 05:32:00 -0400
@@ -20,6 +21,24 @@ Once entered in to blue screen go to Boot --> S5 RTC Wake Settings
 Configure the time to wake up.
 
 <img src="/assets/images/ubutu-wakeup.jpg">
+
+This worked like charm with the windows operating system which comes with the PC. But did not work with Ubuntu.
+Also this BIOS level wake is not going to help me if I want to wake up multiple times in a day.
+
+
+Time to look at RTC wake up alarm at the operating system level.
+Also it is allowing one wakeup alarm at a time. Even worse, the alarm gets removed if the PC turned on manually before the wake up time. This is a real challenge.
+
+Thinking of...
+- intercept shutdown to call a script so we can place the alarm every time.
+- write the script to calculate the time to set alarm based on the list of wake up times configured in a file. Then finally call perform the shutdown.
+
+What if someone unplug without proper shutdown?
+Change BIOS setting to automatic OS startup as soon as power connected. 
+Configure to suspend the OS when idle for 2 hour. (What idle means? No user interaction or no CPU intensive programs). I dont want to suspend when my automation running.
+Maybe create script which justs sets the wakeup alarm. Then run it in background every 1 hour.
+Maybe the simple answer is - ask family not to touch this automation PC. Schedule to poweroff and poweron by planning the automation well.
+
 
 ## Automatic Power OFF
 You may shedule your automation task as regular user using `crontab -e` command.
