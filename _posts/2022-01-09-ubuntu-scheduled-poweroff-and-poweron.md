@@ -39,7 +39,7 @@ Maybe create script which justs sets the wakeup alarm. Then run it in background
 Maybe the simple answer is - ask family not to touch this automation PC. Schedule to poweroff and poweron by planning the automation well.
 
 
-```sh set_next_wakeup
+```
 
 #!/bin/bash
 
