@@ -40,6 +40,7 @@ Maybe the simple answer is - ask family not to touch this automation PC. Schedul
 
 
 ```sh set_next_wakeup
+
 #!/bin/bash
 
 #List the alarm times in the orderly fashion and spearated with space
@@ -113,6 +114,7 @@ rtcwake: wakeup using /dev/rtc0 at Sat Jan 15 20:30:00 2022
 automation@automation-mini:~$ date
 Sat 15 Jan 2022 03:07:46 PM EST
 automation@automation-mini:~$
+
 ```
 
 To suspend...
@@ -195,7 +197,26 @@ Failed to talk to init daemon.
 
 It did not work, because I used `crontab -e` to configure it. So the command end up asking for password interactively in the background. You know I will not know.
 
+## Kernel settings
+If we set rtcwake but not really suspend, we will see below annoying message in `/var/log/kern.log`
+```
+Jan 15 14:05:32 automation-mini kernel: [ 6944.268665] hpet: Lost 7161 RTC interrupts
+Jan 15 14:05:33 automation-mini kernel: [ 6945.448545] hpet: Lost 7161 RTC interrupts
+Jan 15 14:05:35 automation-mini kernel: [ 6946.631170] hpet: Lost 7160 RTC interrupts
+```
 
+Also CPU gets stuck for unknown reasons
+```
+Message from syslogd@automation-mini at Jan 14 22:50:24 ...
+ kernel:[ 6108.100772] watchdog: BUG: soft lockup - CPU#1 stuck for 22s! [echo:4468]
+```
+
+To resolve, add `hpet=disable` to GRUB_CMDLINE_LINUX_DEFAULT in `/etc/default/grub`
+```
+GRUB_CMDLINE_LINUX_DEFAULT="quiet hpet=disable"
+```
+
+Once updated execute `sudo update-grub`
 
 
 ## Other options not tried or used or gained confidence to share
