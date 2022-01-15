@@ -39,6 +39,93 @@ Maybe create script which justs sets the wakeup alarm. Then run it in background
 Maybe the simple answer is - ask family not to touch this automation PC. Schedule to poweroff and poweron by planning the automation well.
 
 
+```sh set_next_wakeup
+#!/bin/bash
+
+#List the alarm times in the orderly fashion and spearated with space
+alarms=$@
+echo $alarms
+for alarm in ${alarms[@]}; do
+
+  DESIRED=$((`date +%s -d "$alarm"`))
+  NOW=$((`date +%s`))
+  if [ $DESIRED -gt $NOW ]; then
+    ALARM_TIME=$alarm
+    echo $alarm - $ALARM_TIME
+    break;
+  fi
+done
+if [ -z $ALARM_TIME ]; then
+	echo "No more alarm for today"
+	ALARM_TIME=$1
+fi
+
+echo "Next wakeup" $ALARM_TIME
+
+# Argument check
+if [ $# -lt 1 ]; then
+    echo "Usage: set_next_wakeup HH:MM <HH:MM>"
+    exit
+fi
+
+# Check whether specified time today or tomorrow
+TODAY=`date '+%F'`
+ALARM_DATE_TIME=`date -d "$TODAY ${ALARM_TIME}"`
+echo "ALARM_DATE_TIME:" ${ALARM_DATE_TIME}
+ALARM_TIME_MS=`date -d "${TODAY} ${ALARM_TIME}" +%s`
+NOW=$((`date +%s`))
+echo "ALARM_TIME_MS:" ${ALARM_TIME_MS}
+echo "NOW:" $NOW
+if [ ${ALARM_TIME_MS} -lt $NOW ]; then
+    echo "Alarm time ${ALARM_TIME} - ${ALARM_TIME_MS} for today alread passed. Choosing tomorrow"
+    ALARM_TIME_MS=$((${ALARM_TIME_MS} + 24*60*60))
+fi
+echo ${ALARM_TIME_MS}
+#sudo echo 0 > /sys/class/rtc/rtc0/wakealarm
+cat /sys/class/rtc/rtc0/wakealarm
+#tail /var/log/kern.log
+sleep 2
+#tail /var/log/kern.log
+#sudo echo ${ALARM_TIME_MS} > /sys/class/rtc/rtc0/wakealarm
+sudo rtcwake --mode no --time ${ALARM_TIME_MS}
+cat /sys/class/rtc/rtc0/wakealarm
+#tail /var/log/kern.log
+sleep 2
+#tail /var/log/kern.log
+```
+
+Example run/test
+
+```sh
+
+automation@automation-mini:~$ sudo ./set_next_wakeup 14:15 15:30 18:20
+14:15 15:30 18:20
+15:30 - 15:30
+Next wakeup 15:30
+ALARM_DATE_TIME: Sat 15 Jan 2022 03:30:00 PM EST
+ALARM_TIME_MS: 1642278600
+NOW: 1642277255
+1642278600
+1642278600
+rtcwake: assuming RTC uses UTC ...
+rtcwake: wakeup using /dev/rtc0 at Sat Jan 15 20:30:00 2022
+1642278600
+automation@automation-mini:~$ date
+Sat 15 Jan 2022 03:07:46 PM EST
+automation@automation-mini:~$
+```
+
+To suspend...
+
+```
+sudo systemctl suspend
+```
+
+To configure suspend in crontab use `sudo crontab -e` 
+```
+29 5 * * * systemctl suspend
+```
+
 ## Automatic Power OFF
 You may shedule your automation task as regular user using `crontab -e` command.
 But schedule the shutdown as root user by configuring at `sudo crontab -e`.
@@ -46,7 +133,16 @@ Find the exact location of shutdown using `which shutdown` and use it as below.
 ```
 43 5 * * * /usr/sbin/shutdown -h now
 ```
+Shutting down or stopping power supply could lose the wakeup alarm. So we have to suspend instead of poweroff.
 
+
+## Automatic suspend
+You may shedule your automation task as regular user using `crontab -e` command.
+But schedule the suspend as root user by configuring at `sudo crontab -e`.
+
+```
+43 5 * * * sudo systemctl suspend
+```
 
 ## Challenges and Learning
 To power off, I tried to use `shutdown` and `poweroff` commands in crontab.
@@ -103,7 +199,6 @@ It did not work, because I used `crontab -e` to configure it. So the command end
 
 
 ## Other options not tried or used or gained confidence to share
-- rtcwake - Not sure it will wake up if PC power unplugged and plugged in.
 - specifying username in crontab instead of using `sudo crontab -e` - https://serverfault.com/questions/352835/crontab-running-as-a-specific-user
     ```
     43 5 * * * root /usr/sbin/shutdown -h now > /home/automation/shutdown.log 2>&1
