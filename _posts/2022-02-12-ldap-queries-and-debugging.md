@@ -47,8 +47,8 @@ ldapsearch -H ldaps://ad.example.com:636 -x -D mahendran -w XXXXX -b "cn=Super H
 This simple command could bring entire AD objects. That may not be your intention. Or result into error like certficate error or too much result. Here are other useful parameters 
 
     -Z or --trustAll ==> to avoid certificate errors
-    -z 100 ==> to limit 100 records
-    -j /path/to/password.txt or --passwordFile /path/to/password.txt ==> to avoid leaving password in the history
+    -z 100 or -E pr=100 ==> to limit 100 records
+    -j /path/to/password.txt or --passwordFile /path/to/password.txt or -w `cat /path/to/password.txt` ==> to avoid leaving password in the history
 
 At times we may need few attributes instead of all. We can specify the list of attributes 
 
@@ -68,11 +68,35 @@ Using AND (&) and OR(|) makes search powerful and avoid transferring unwanted da
 When using logical operations and more filter, it is easy to loose track of paranthesis.
 Its is good idea to prepare the structure (&()()(|()())) before filling conditions.
 
+```
+(&
+    (objectclass=user)
+    (objectcategory=person)
+    (memberOf=cn=Super Heros,ou=groups,dc=avengers,dc=example,dc=com)
+)
+```
+
+## Limit/Page the number of records
+Use `-E pr=10` to get limitted number of records like pagination.
+
+For scripting, we can avoid prompt for manual intervention `-E pr=1000/noprompt`.
+
+## Counting
+There is no straight query to get the count from ldap server based on a search criteria.
+We have to search get records and count them by scripting.
+
+```
+ldapsearch -H ldaps://ad.example.com:636 -E pr=1000/noprompt -x -D mahendran -w XXXXX  -b "dc=example,dc=com" -s sub -a always "(memberOf=cn=Super Heros,ou=groups,dc=avengers,dc=example,dc=com)" dn | grep 'dn:' | wc -l
+```
+
+
 
 ## Bad and Pain giving practices
 - Avoid escape needed characters in naming as it is painful to construct the search filter by carefully escaping it.
     - Example: cn=Super Heros,ou=groups,dc=(Just for pain),dc=example,dc=com
     - To search...
 ```
-ldapsearch -H ldaps://ad.example.com:636 -x -D mahendran -w XXXXX  -b "cn=Super Heros,ou=groups,dc=(Just for pain),dc=example,dc=com" -s sub -a always "(heroName=Captain America)" 
+ldapsearch -H ldaps://ad.example.com:636 -x -D mahendran -w XXXXX  -b "dc=example,dc=com" -s sub -a always "(memberOf=cn=Super Heros,ou=groups,dc=\28Just for pain\29,dc=example,dc=com)" 
 ```
+
+## Tips
