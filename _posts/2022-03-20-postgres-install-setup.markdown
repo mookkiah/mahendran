@@ -155,8 +155,8 @@ psql --list
            |           |          |         |       | mahendran=CTc/mahendran
 (3 rows)
 
-
 ```
+
 ```
 /* --------- List all of the current sessions --------- */ 
 
@@ -182,8 +182,9 @@ SELECT pg_terminate_backend( <procpid> );
 ```
 
 ### Create database
+```
 create database <database_name>;
-
+```
 
 ### Connect to a database
 ```
@@ -191,14 +192,19 @@ create database <database_name>;
 ```
 
 ###  List all the schemas
+```
 \dn+
+```
 
 ###  Drop schema
+```
 drop schema <schema_name> cascade;
+```
 
 ###  Create Schema
+```
 create schema <schema_name> authorization <owner_user_name>;
-
+```
 
 ### List tables all or filter
 ```
