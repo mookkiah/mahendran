@@ -137,6 +137,78 @@ This configure the user and add the web application via apache http server which
 Now you can access the application locally http://localhost/pgadmin4 or remotely with IP http://<hostname/IP>/pgadmin4
 
 
+### Connect to remote database
+./psql -h <host> -U <user> <database>
+
+### To  list databases
+```
+psql --list
+                              List of databases
+   Name    |   Owner   | Encoding | Collate | Ctype |    Access privileges    
+-----------+-----------+----------+---------+-------+-------------------------
+ postgres  | mahendran | UTF8     | C       | C     | 
+ template0 | mahendran | UTF8     | C       | C     | =c/mahendran           +
+           |           |          |         |       | mahendran=CTc/mahendran
+ template1 | mahendran | UTF8     | C       | C     | =c/mahendran           +
+           |           |          |         |       | mahendran=CTc/mahendran
+(3 rows)
+
+
+```
+```
+/* --------- List all of the current sessions --------- */ 
+
+SELECT * FROM pg_stat_activity;
+select pid, query, state from pg_stat_activity;
+
+
+/* --------- List current sessions from the "clients" database --------- */ 
+SELECT * FROM pg_stat_activity WHERE datname='clients';
+
+/* --------- Cancels the backend process where <procpid> is the process id returned from pg_stat_activity for the query you want to cancel --------- */ 
+SELECT pg_cancel_backend( <procpid> );
+
+/* --------- Cancels the backend process and terminates the user's session where <procpid> is the process id returned from pg_stat_activity 
+for the query you want to cancel --------- */ 
+SELECT pg_terminate_backend( <procpid> );
+```
+
+
+### List all databases from psql commandline
+```
+\list or \l
+```
+
+### Create database
+create database <database_name>;
+
+
+### Connect to a database
+```
+\c <database_name>
+```
+
+###  List all the schemas
+\dn+
+
+###  Drop schema
+drop schema <schema_name> cascade;
+
+###  Create Schema
+create schema <schema_name> authorization <owner_user_name>;
+
+
+### List tables all or filter
+```
+\dt+ *.*
+\dt+ <schema_name>.*
+```
+
+### Describe table
+```
+\d+ <table_name>
+```
+
 To improve the productivity, Don't search for commands and copy paste before attempting to find using `\?`.
 
 
