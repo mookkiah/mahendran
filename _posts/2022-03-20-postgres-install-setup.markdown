@@ -138,7 +138,9 @@ Now you can access the application locally http://localhost/pgadmin4 or remotely
 
 
 ### Connect to remote database
+```
 ./psql -h <host> -U <user> <database>
+```
 
 ### To  list databases
 ```
