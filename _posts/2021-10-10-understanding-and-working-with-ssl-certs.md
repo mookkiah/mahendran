@@ -372,6 +372,13 @@ var body = client.send(request, HttpResponse.BodyHandlers.ofString());
 
     Note: untrusted-root.badssl.com not just holding untrusted cert, it is also missing to provide information about the CA which is blocking us to trust this site. This process should work when you have all intermediate CA certificate available in the certificate chain to add it to cacerts
 
+## Explicitly mentioning cacerts path
+At times we may not have the permission to move or import certificate into cacerts file. In that case we could copy existing cacerts to a place where we can have edit permission. Then import the certificate as mentioned above. 
+
+To test the application using the new cacerts file in differnt location, add following JVM parameters to the java command. `changeit` is the default password. In your case use your cacerts password. If it is `changeit`, just a friendly advice... there is a reason why that password choosen like that :-).
+```
+java -Djavax.net.ssl.trustStore=custompath/cacerts -Djavax.net.ssl.trustStorePassword=changeit
+```
 
 ## List certs from Java cacerts
 ```
