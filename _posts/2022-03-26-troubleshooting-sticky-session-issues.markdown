@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Postgres installation and setup in Ubuntu and Mac"
+title:  "Troubleshooting Sticky Session failures"
 date:   2022-03-26 05:25:00 -0400
 categories: networking
 ---
