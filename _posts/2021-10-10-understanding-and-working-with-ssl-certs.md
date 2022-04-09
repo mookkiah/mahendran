@@ -387,10 +387,12 @@ $ keytool -list -keystore cacerts -storepass changeit
 
 
 ## Extracting certificate using Java
-Sometimes due to the nature of network components (proxy, firewall, network policy, zscaller) you may be limitted to access certain url only via Java application. Also you may not be get certificate of all intermediatories CAs. In that case your infrastructure team should offer the CA Root and intermediatories certificates for you to add in cacerts. Still you may face issue like PKIX failure exception.
+Sometimes due to the nature of network components (proxy, firewall, network policy, zscaller) you may be limitted to access certain url only via Java application and openssl may not help. Also you may not be get certificate of all intermediatories CAs. In that case your infrastructure team should offer the CA Root and intermediatories certificates for you to add in cacerts. Still you may face issue like PKIX failure exception.
 
 To find which CAs causing PKIX issue or get the CAs so you can verify or add it to cacerts, we can use following code.
     Note: Don't use this code in production application. Use it to figure out problem and proove what CAs missing 
+
+
 
 ```
 import java.io.FileOutputStream;
@@ -408,7 +410,7 @@ import javax.net.ssl.X509TrustManager;
 public class ExtractCertificate {
 
   // Try few user from here https://badssl.com/
-  static String urlToExtractCertificates = "https://sha1-intermediate.badssl.com/";
+  static String urlToExtractCertificates = "https://nvd.nist.gov";
   // "https://untrusted-root.badssl.com/";
   // "https://no-common-name.badssl.com/";
 
@@ -464,4 +466,35 @@ public class ExtractCertificate {
   }
 }
 
+```
+
+Here is an example site where openssl is not helping to extract certificate
+```
+mahendran@mm-lab ~ % openssl s_client -showcerts -connect nvd.nist.gov:443
+CONNECTED(00000005)
+4309630444:error:14004458:SSL routines:CONNECT_CR_SRVR_HELLO:tlsv1 unrecognized name:/System/Volumes/Data/SWE/macOS/BuildRoots/e90674e518/Library/Caches/com.apple.xbs/Sources/libressl/libressl-56.60.2/libressl-2.8/ssl/ssl_pkt.c:1200:SSL alert number 112
+4309630444:error:140040E5:SSL routines:CONNECT_CR_SRVR_HELLO:ssl handshake failure:/System/Volumes/Data/SWE/macOS/BuildRoots/e90674e518/Library/Caches/com.apple.xbs/Sources/libressl/libressl-56.60.2/libressl-2.8/ssl/ssl_pkt.c:585:
+---
+no peer certificate available
+---
+No client certificate CA names sent
+---
+SSL handshake has read 7 bytes and written 0 bytes
+---
+New, (NONE), Cipher is (NONE)
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : 0000
+    Session-ID: 
+    Session-ID-ctx: 
+    Master-Key: 
+    Start Time: 1649471502
+    Timeout   : 7200 (sec)
+    Verify return code: 0 (ok)
+---
+mahendran@mm-lab ~ % 
 ```
