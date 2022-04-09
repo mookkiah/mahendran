@@ -2,7 +2,7 @@
 layout: post
 title:  "Understanding & Working with SSL certificates"
 date:   2021-10-09 07:34:00  -0400
-modified_date:   2022-04-02 09:40:00  -0400
+modified_date:   2022-04-08 21:55:00  -0400
 categories: security ssl
 ---
 
@@ -333,7 +333,6 @@ done
 ```
 mahendran@mm-lab ~ % openssl s_client -showcerts -connect google.com:443  </dev/null 2>&1 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > google-chain.crt
 mahendran@mm-lab ~ % ./keytool_import_all.sh google-chain.crt changeit ~/cacerts-with-badssl
-mahendran@mm-lab ~ % ./keytool_import_all.sh google-chain.crt changeit ~/cacerts-with-badssl
 Certificate was added to keystore
 Certificate was added to keystore
 Certificate was added to keystore
@@ -384,4 +383,85 @@ java -Djavax.net.ssl.trustStore=custompath/cacerts -Djavax.net.ssl.trustStorePas
 ## List certs from Java cacerts
 ```
 $ keytool -list -keystore cacerts -storepass changeit
+```
+
+
+## Extracting certificate using Java
+Sometimes due to the nature of network components (proxy, firewall, network policy, zscaller) you may be limitted to access certain url only via Java application. Also you may not be get certificate of all intermediatories CAs. In that case your infrastructure team should offer the CA Root and intermediatories certificates for you to add in cacerts. Still you may face issue like PKIX failure exception.
+
+To find which CAs causing PKIX issue or get the CAs so you can verify or add it to cacerts, we can use following code.
+    Note: Don't use this code in production application. Use it to figure out problem and proove what CAs missing 
+
+```
+import java.io.FileOutputStream;
+import java.net.URL;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+public class ExtractCertificate {
+
+  // Try few user from here https://badssl.com/
+  static String urlToExtractCertificates = "https://sha1-intermediate.badssl.com/";
+  // "https://untrusted-root.badssl.com/";
+  // "https://no-common-name.badssl.com/";
+
+  // TrustManager which simply accepts all certificate - Never put this code in production.
+  static TrustManager[] trustAllCerts = new TrustManager[] {new X509TrustManager() {
+    public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+      return null;
+    }
+
+    public void checkClientTrusted(X509Certificate[] arg0, String arg1)
+        throws CertificateException {}
+
+    public void checkServerTrusted(X509Certificate[] arg0, String arg1)
+        throws CertificateException {}
+  }};
+
+
+  // Trust all hostnames - Never put this code in production.
+  static HostnameVerifier validHosts = new HostnameVerifier() {
+    public boolean verify(String arg0, SSLSession arg1) {
+      return true;
+    }
+  };
+
+  // keytool -import -alias badsslintermediate -file cert-1 -keystore cacerts -storepass changeit -noprompt
+  public static void main(String[] args) throws Exception {
+
+    // Build a SSL context which trust all certs.
+    var sslContext = SSLContext.getInstance("SSL");
+    sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+    // Use the ssl context to build HTTP connection.
+    HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
+    HttpsURLConnection.setDefaultHostnameVerifier(validHosts);
+
+    var destinationURL = new URL(urlToExtractCertificates);
+    var conn = (HttpsURLConnection) destinationURL.openConnection();
+    conn.connect();
+    Certificate[] certs = conn.getServerCertificates();
+    System.out.println("Number of Certificates = " + certs.length);
+
+    int i = 1;
+    for (Certificate cert : certs) {
+      //System.out.println("Certificate is: " + cert);
+      //System.out.println(cert.getPublicKey());
+      //System.out.println(cert.getEncoded());
+      if (cert instanceof X509Certificate) {
+        FileOutputStream os = new FileOutputStream("cert-" + i);
+        os.write(cert.getEncoded());
+        os.close();
+        i++;
+      }
+    }
+  }
+}
+
 ```
