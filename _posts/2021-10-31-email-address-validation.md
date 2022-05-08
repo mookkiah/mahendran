@@ -71,8 +71,6 @@ Defining requirement is somewhat easy, but it is very complex to find ways to va
 
 ### MX server existance check
 
-### Verifying with MX server
-
 To verify whether an email domain(the value after @ symbol in email address) has real mail exchange servers. We can query the mx records using `nslookup` commands.
 
 We will see one or more `mail exchanger` if there is exchange behind the domain.
@@ -128,6 +126,9 @@ mahendran@mm-lab ~ % nc -z -v -u gmail-smtp-in.l.google.com. 2525
 Connection to gmail-smtp-in.l.google.com. port 2525 [udp/ms-v-worlds] succeeded!
 
 ```
+### Verifying an email address with MX server
+
+This section will 
 
 ### Maintaining Disposable Email Provider List
 
