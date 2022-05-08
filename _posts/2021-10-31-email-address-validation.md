@@ -73,7 +73,64 @@ Defining requirement is somewhat easy, but it is very complex to find ways to va
 
 ### Verifying with MX server
 
+To verify whether an email domain(the value after @ symbol in email address) has real mail exchange servers. We can query the mx records using `nslookup` commands.
+
+We will see one or more `mail exchanger` if there is exchange behind the domain.
+
+```
+mahendran@mm-lab ~ % nslookup -q=mx gmail.com
+Server:		192.168.1.1
+Address:	192.168.1.1#53
+
+Non-authoritative answer:
+gmail.com	mail exchanger = 40 alt4.gmail-smtp-in.l.google.com.
+gmail.com	mail exchanger = 5 gmail-smtp-in.l.google.com.
+gmail.com	mail exchanger = 30 alt3.gmail-smtp-in.l.google.com.
+gmail.com	mail exchanger = 10 alt1.gmail-smtp-in.l.google.com.
+gmail.com	mail exchanger = 20 alt2.gmail-smtp-in.l.google.com.
+
+Authoritative answers can be found from:
+alt3.gmail-smtp-in.l.google.com	internet address = 172.253.62.27
+alt1.gmail-smtp-in.l.google.com	has AAAA address 2607:f8b0:400d:c0f::1b
+alt2.gmail-smtp-in.l.google.com	internet address = 108.177.12.26
+alt4.gmail-smtp-in.l.google.com	internet address = 64.233.186.27
+gmail-smtp-in.l.google.com	internet address = 172.217.215.27
+gmail-smtp-in.l.google.com	has AAAA address 2607:f8b0:4002:c0f::1a
+mahendran@mm-lab ~ % nslookup -q=mx mm-notes.com
+Server:		192.168.1.1
+Address:	192.168.1.1#53
+
+Non-authoritative answer:
+*** Can't find mm-notes.com: No answer
+
+Authoritative answers can be found from:
+mm-notes.com
+	origin = ns39.domaincontrol.com
+	mail addr = dns.jomax.net
+	serial = 2021092603
+	refresh = 28800
+	retry = 7200
+	expire = 604800
+	minimum = 600
+
+mahendran@mm-lab ~ % 
+```
+The mail exchange server listens one or more of these ports 25(SMTP), 587(SMTP), 465(SMTPS), 2525.
+
+```
+mahendran@mm-lab ~ % nc -z -v -u gmail-smtp-in.l.google.com. 587
+Connection to gmail-smtp-in.l.google.com. port 587 [udp/submission] succeeded!
+mahendran@mm-lab ~ % nc -z -v -u gmail-smtp-in.l.google.com. 25 
+Connection to gmail-smtp-in.l.google.com. port 25 [udp/smtp] succeeded!
+mahendran@mm-lab ~ % nc -z -v -u gmail-smtp-in.l.google.com. 465
+Connection to gmail-smtp-in.l.google.com. port 465 [udp/igmpv3lite] succeeded!
+mahendran@mm-lab ~ % nc -z -v -u gmail-smtp-in.l.google.com. 2525
+Connection to gmail-smtp-in.l.google.com. port 2525 [udp/ms-v-worlds] succeeded!
+
+```
+
 ### Maintaining Disposable Email Provider List
+
 
 ### Maintaining Blocklisted Domains
 
