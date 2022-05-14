@@ -2,6 +2,7 @@
 layout: post
 title:  "Logging HTTP headers at web server"
 date:   2021-10-09 06:40:00  -0400
+modified_date: 2022-05-14 10:03:00  -0400
 categories: devops webserver
 ---
 
@@ -71,6 +72,8 @@ To print cookies
 
 ```
 -->
+
+
 ## Nginx
 Nginx is the most popular web server which used for serving static contents and act as reverse proxy to handle complex routing, url re-writing functionalities.
 
@@ -142,6 +145,49 @@ header_filter_by_lua_block {
       return request_headers_all
     }
 ```
+
+## Apache HTTPD
+Finding where httpd installed and where the active configuration files present may be a challenge.
+Normally it can be found somewhere under '/etc' or '/opt' directory with name like `apached` `httpd`. Use `grep` to find.
+The minimum httpd installation may not have the capability to print headers. 
+This capability comes from apache module [mod_log_forensic](https://httpd.apache.org/docs/current/mod/mod_log_forensic.html).
+I am lucky to have this module preinstalled with all the product I used. So to log header, we have to find the LogFormat configuration for access_log file
+Here is the snippet which adds non standard headers (X-Forwarded-For, X-Forwarded-Proto) to the combined format which is used by access_log.
+
+/etc/httpd/conf/httpd.conf
+
+```
+<IfModule log_config_module>
+    #
+    # The following directives define some format nicknames for use with
+    # a CustomLog directive (see below).
+    #
+    LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" %{X-Forwarded-For}i %{X-Forwarded-Proto}i \"%{User-Agent}i\"" combined
+    LogFormat "%h %l %u %t \"%r\" %>s %b" common
+
+    <IfModule logio_module>
+      # You need to enable mod_logio.c to use %I and %O
+      LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %I %O" combinedio
+    </IfModule>
+
+    #
+    # The location and format of the access logfile (Common Logfile Format).
+    # If you do not define any access logfiles within a <VirtualHost>
+    # container, they will be logged here.  Contrariwise, if you *do*
+    # define per-<VirtualHost> access logfiles, transactions will be
+    # logged therein and *not* in this file.
+    #
+    #CustomLog "logs/access_log" common
+
+    #
+    # If you prefer a logfile with access, agent, and referer information
+    # (Combined Logfile Format) you can use the following directive.
+    #
+    CustomLog "logs/access_log" combined
+</IfModule>
+```
+
+
 > **WARNING**: Do not log all the headers as it will open many security loophole and violating PII, GDPR regulations.
 
 <!---
