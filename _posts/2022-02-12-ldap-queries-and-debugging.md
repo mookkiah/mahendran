@@ -2,6 +2,7 @@
 layout: post
 title: "Using LDAP and AD"
 date: 2022-02-13 08:50:00 -0400
+modified_date: 2022-05-21 12:05:00 -0400
 categories: ldap
 ---
 
@@ -41,7 +42,7 @@ com.unboundid.ldap.sdk.LDAPBindException: 80090308: LdapErr: DSID-0C090439, comm
 
 Note: The parameters described here tested based on Gluu opendj (which is a fork of forgerock)
 Minimum parameters to supply for search...
-```
+```sh
 ldapsearch -H ldaps://ad.example.com:636 -x -D mahendran -w XXXXX -b "cn=Super Heros,ou=example,ou=com" "objectClass=*"
 ```
 This simple command could bring entire AD objects. That may not be your intention. Or result into error like certficate error or too much result. Here are other useful parameters 
@@ -50,8 +51,18 @@ This simple command could bring entire AD objects. That may not be your intentio
     -z 100 or -E pr=100 ==> to limit 100 records
     -j /path/to/password.txt or --passwordFile /path/to/password.txt or -w `cat /path/to/password.txt` ==> to avoid leaving password in the history
 
-At times we may need few attributes instead of all. We can specify the list of attributes 
+At times we may need few attributes instead of all. We can specify the list of attributes with space
 
+```sh
+ldapsearch -H ldaps://ad.example.com:636 -x -D mahendran -w XXXXX -b "cn=Super Heros,ou=example,ou=com" "objectClass=*" dn mail
+```
+
+To search entries which does not have a specific attribute
+
+```
+ldapsearch -H ldaps://ad.example.com:636 -x -D mahendran -w XXXXX -b "cn=Super Heros,ou=example,ou=com" "(!(mail=*))" # without email address
+ldapsearch -H ldaps://ad.example.com:636 -x -D mahendran -w XXXXX -b "cn=Super Heros,ou=example,ou=com" "(!(uid=*))" # without uid attribute
+```
 ## Search filter
 If your AD has large number of records, it is recommended to apply filter so you get the result you wanted and faster.
 To get it efficiently, use filters (https://ldap.com/ldap-filters/)
@@ -85,17 +96,29 @@ For scripting, we can avoid prompt for manual intervention `-E pr=1000/noprompt`
 There is no straight query to get the count from ldap server based on a search criteria.
 We have to search get records and count them by scripting.
 
-```
+
+```sh
 ldapsearch -H ldaps://ad.example.com:636 -E pr=1000/noprompt -x -D mahendran -w XXXXX  -b "dc=example,dc=com" -s sub -a always "(memberOf=cn=Super Heros,ou=groups,dc=avengers,dc=example,dc=com)" dn | grep 'dn:' | wc -l
 ```
 
+
+OpenDJ has option to count the records `--countEntries`. This will still print the `dn` values of all counted.
+```sh
+$ /opt/opendj/bin/ldapsearch -h localhost -p 1636 -Z -X -D "cn=directory manager" --bindPasswordFile /tmp/.pw -b 'dc=example,dc=com' --countEntries 'creationTimestamp=20210607171657.798Z' dn
+.
+.
+.
+# Total number of matching entries: 70
+$ /opt/opendj/bin/ldapsearch -h localhost -p 1636 -Z -X -D "cn=directory manager" --bindPasswordFile /tmp/.pw -b 'dc=example,dc=com' --countEntries 'creationTimestamp>=20210607171657.798Z' dn
+$ /opt/opendj/bin/ldapsearch -h localhost -p 1636 -Z -X -D "cn=directory manager" --bindPasswordFile /tmp/.pw -b 'dc=example,dc=com' --countEntries '(&(creationTimestamp>=20220207000000.000Z)(creationTimestamp<=20220208000000.000Z))' dn
+```
 
 
 ## Bad and Pain giving practices
 - Avoid escape needed characters in naming as it is painful to construct the search filter by carefully escaping it.
     - Example: cn=Super Heros,ou=groups,dc=(Just for pain),dc=example,dc=com
     - To search...
-```
+```sh
 ldapsearch -H ldaps://ad.example.com:636 -x -D mahendran -w XXXXX  -b "dc=example,dc=com" -s sub -a always "(memberOf=cn=Super Heros,ou=groups,dc=\28Just for pain\29,dc=example,dc=com)" 
 ```
 
