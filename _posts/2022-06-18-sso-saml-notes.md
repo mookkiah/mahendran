@@ -50,3 +50,5 @@ Sample AuthnRequest with `AssertionConsumerServiceURL`
 ```
 
 
+## References
+[SAML 2.0 Specification](https://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)

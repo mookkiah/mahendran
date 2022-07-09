@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Understanding & Working with SSL certificates"
-date:   2021-10-09 07:34:00  -0400
-modified_date:   2022-04-08 21:55:00  -0400
+date: 2021-10-09 07:34:00  -0400
+modified_date:   2022-07-09 05:32:00  -0400
 categories: security ssl
 ---
 
@@ -457,7 +457,7 @@ public class ExtractCertificate {
       //System.out.println(cert.getPublicKey());
       //System.out.println(cert.getEncoded());
       if (cert instanceof X509Certificate) {
-        FileOutputStream os = new FileOutputStream("cert-" + i);
+        FileOutputStream os = new FileOutputStream("cert-" + i)+".der";
         os.write(cert.getEncoded());
         os.close();
         i++;
@@ -467,6 +467,13 @@ public class ExtractCertificate {
 }
 
 ```
+
+To convert the generated DER file from above Java program you can use following command
+```
+openssl x509 -inform der -in cert-1.der
+```
+
+
 
 Here is an example site where openssl is not helping to extract certificate
 ```
