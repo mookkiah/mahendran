@@ -2,11 +2,14 @@
 layout: post
 title:  "Installing JDK on Ubuntu"
 date:   2021-11-25 12:55:00 -0400
+modified_date:   2022-11-04 021:36:00  -0400
 categories: ubuntu java
 ---
 
-## Environment
+## Environments 
 - Ubuntu 20-04 running in Mac M1 using parallel
+- AWS EC2 image ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20220912
+
 
 When Java not installed...
 ```
@@ -88,9 +91,21 @@ Linux subanitha 4.15.0-142-generic #146~16.04.1-Ubuntu SMP Tue Apr 13 09:27:15 U
 
 
 After install...
+
 ```
 parallels@ubuntu-linux-20-04-desktop:~$ java -version
 openjdk version "17" 2021-09-14
 OpenJDK Runtime Environment (build 17+35-Ubuntu-120.04)
 OpenJDK 64-Bit Server VM (build 17+35-Ubuntu-120.04, mixed mode, sharing)
+```
+
+In Ubuntu at AWS image ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20220912
+```
+ubuntu@ip-172-31-36-234:~$ javac -version
+javac 17.0.4
+ubuntu@ip-172-31-36-234:~$ java -version
+openjdk version "17.0.4" 2022-07-19
+OpenJDK Runtime Environment (build 17.0.4+8-Ubuntu-122.04)
+OpenJDK 64-Bit Server VM (build 17.0.4+8-Ubuntu-122.04, mixed mode, sharing)
+ubuntu@ip-172-31-36-234:~$
 ```
