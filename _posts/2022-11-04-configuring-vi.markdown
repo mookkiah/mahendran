@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Configuring Vi editor for better usability"
-date:   2022-11-11 21:58:00 -0400
+title: "Configuring Vi editor for better usability"
+date: 2022-11-04 21:58:00 -0400
 categories: unix editor
 ---
 
