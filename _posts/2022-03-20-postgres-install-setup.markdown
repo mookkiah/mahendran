@@ -1,7 +1,8 @@
 ---
 layout: post
-title:  "Postgres installation and setup in Ubuntu and Mac"
-date:   2022-03-20 09:38:00 -0400
+title: "Postgres installation and setup in Ubuntu and Mac"
+date: 2022-03-20 09:38:00 -0400
+modified_date: 2022-11-13 06:15:00  -0400
 categories: postgres
 ---
 
@@ -99,6 +100,22 @@ Stopping `postgresql@12`... (might take a while)
 ==> Successfully started `postgresql@12` (label: homebrew.mxcl.postgresql@12)
 
 ```
+
+On Ubuntu
+```
+ubuntu@ip-172-31-36-234:~$ sudo service postgresql restart
+ubuntu@ip-172-31-36-234:~$ sudo service postgresql status
+● postgresql.service - PostgreSQL RDBMS
+     Loaded: loaded (/lib/systemd/system/postgresql.service; enabled; vendor preset: enabled)
+     Active: active (exited) since Sun 2022-11-06 00:21:16 UTC; 12s ago
+    Process: 19504 ExecStart=/bin/true (code=exited, status=0/SUCCESS)
+   Main PID: 19504 (code=exited, status=0/SUCCESS)
+        CPU: 1ms
+
+Nov 06 00:21:16 ip-172-31-36-234 systemd[1]: Starting PostgreSQL RDBMS...
+Nov 06 00:21:16 ip-172-31-36-234 systemd[1]: Finished PostgreSQL RDBMS.
+```
+
 
 Frequent issues and tips:
 ```
@@ -219,6 +236,32 @@ create schema <schema_name> authorization <owner_user_name>;
 
 To improve the productivity, Don't search for commands and copy paste before attempting to find using `\?`.
 
+
+## Troubleshooting
+
+During the installation, it creates postgres system user which is only way to connect to psql console.
+Once connected, update config_file and hba_file (as above instructions) to meet your needs.
+
+```
+ubuntu@ip-172-31-36-234:~$ psql
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  role "ubuntu" does not exist
+ubuntu@ip-172-31-36-234:~$ nc -z -v localhost 5432
+Connection to localhost (127.0.0.1) 5432 port [tcp/postgresql] succeeded!
+ubuntu@ip-172-31-36-234:~$ netstat -an | grep 'State\|5432'
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN     
+Proto RefCnt Flags       Type       State         I-Node   Path
+unix  2      [ ACC ]     STREAM     LISTENING     89062    /var/run/postgresql/.s.PGSQL.5432
+ubuntu@ip-172-31-36-234:~$ psql -U postgres
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  Peer authentication failed for user "postgres"
+ubuntu@ip-172-31-36-234:~$ sudo su - postgres
+postgres@ip-172-31-36-234:~$ psql
+psql (14.5 (Ubuntu 14.5-0ubuntu0.22.04.1))
+Type "help" for help.
+
+postgres=# \conninfo
+You are connected to database "postgres" as user "postgres" via socket in "/var/run/postgresql" at port "5432".
+```
 
 
 References:
