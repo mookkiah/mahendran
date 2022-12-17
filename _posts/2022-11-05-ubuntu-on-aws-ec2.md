@@ -120,7 +120,20 @@ Following command shows `mate` desktop available and RDP port is LISTENING
 tcp6       0      0 :::3389                 :::*                    LISTEN 
 ```
 
+Change password for ec2-user to use for remote desktop connection
+```
+[ec2-user@ip-172-31-49-247 ~]$ sudo passwd ec2-user
+Changing password for user ec2-user.
+New password: 
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+```
+
 #### Installing GUI
+
+> **Warning**
+> Installing GUI on free tier ubuntu could make the instance less responsive. In case of freezing happens either try restarting via AWS management console or get more CPU especially if this is not for learning purpose.
+
 
 Following command sequence will install desktop and enable RDP.
 ```shell
@@ -134,7 +147,22 @@ ubuntu@ip-172-31-34-250:~$ sudo apt install xrdp
 ubuntu@ip-172-31-34-250:~$ sudo systemctl enable xrdp
 ubuntu@ip-172-31-34-250:~$ nc -z -v localhost 3389
 Connection to localhost (127.0.0.1) 3389 port [tcp/ms-wbt-server] succeeded!
+
 ```
+
+Change password to use in remote desktop connection
+```
+ubuntu@ip-172-31-34-250:~$ sudo passwd ubuntu
+New password: 
+Retype new password: 
+passwd: password updated successfully
+```
+
+## Lessons Used and Learned
+- Creating EC2
+- Limitting the EC2 access from a particular IP
+- Ubuntu free-tier is not recommended to use GUI
+- First use of Amazon AMI with mate GUI.
 
 
 ## Remember to stop the instance
