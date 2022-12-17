@@ -1,10 +1,9 @@
 ---
 layout: page
-title: About
+title: About Me
 permalink: /about/
 ---
 
-# About Me
 
 Thanks for visiting my notes site and this page.
 
