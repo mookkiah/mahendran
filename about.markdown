@@ -9,7 +9,8 @@ permalink: /about/
 Thanks for visiting my notes site and this page.
 
 At school, I helped (actually spoiled) many of my friends by letting them copy my math homework book and made the teachers upset.
-At college, I helped the computer lab technician with his work so I can get admin/root credentials and enjoyed by sendint wall, net send commands to show off. 
+
+At college, I helped the computer lab technician with his work so I got admin/root rights and enjoyed by sending wall, net send commands to show off. 
 
 ## Favorite books during college
 Spend most of the time with books like  `The C programming language` by Dennis Ritchie, `Let Us C and Pointers in C` by Yashavant P. Kanetkar, `TCP/IP Illustrated` by Stevens W. Richard and `The Complete Reference of RedHat`.
