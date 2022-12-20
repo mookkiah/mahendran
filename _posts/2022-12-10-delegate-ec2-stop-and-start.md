@@ -32,10 +32,6 @@ As there are multiple ways to meet the need. There are pros and cons in the impl
 - Does AWS provide any solution for this kind of requirement to save cost?
 
 
-
-
-
-
 ## Implementation
 
 - Create Policy - LamdaToStartAndStopEC2Instance
@@ -55,8 +51,9 @@ As there are multiple ways to meet the need. There are pros and cons in the impl
     {
       "Effect": "Allow",
       "Action": [
-        "ec2:Start*",
-        "ec2:Stop*"
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "ec2:DescribeInstances"
       ],
       "Resource": "*"
     }
@@ -85,12 +82,12 @@ In Code source...
 ```
 import boto3
 region = 'us-east-1'
-instances = ['i-0db31f8ed02541ce0', 'i-03e4c56c0febe6ec3', 'i-0efc9e4bbb5c9df72']
+instances = ['i-0db31f8ed02541ce9', 'i-03e4c56c0febe6ecb', 'i-0efc9e4bbb5c9df74']
 ec2 = boto3.client('ec2', region_name=region)
 
 def lambda_handler(event, context):
     ec2.stop_instances(InstanceIds=instances)
-    print('stopped your instances: ' + str(instances))
+    return 'Stopped your instances: ' + str(instances)
 ```
 
 
@@ -106,13 +103,29 @@ Change region and instances.
 Almost all same excepting giving different function name and code source as below.
 ```
 import boto3
+import json
+
 region = 'us-east-1'
 instances = ['i-0efc9e4bbb5c9df74']
 ec2 = boto3.client('ec2', region_name=region)
 
 def lambda_handler(event, context):
     ec2.start_instances(InstanceIds=instances)
-    print('started your instances: ' + str(instances))
+    print('Started your instances: ' + str(instances))
+    instants_short = []
+    descriptions = ec2.describe_instances(InstanceIds=instances)
+    print(json.dumps(descriptions, default=str))
+    reservations = descriptions['Reservations']
+    for reservation in reservations:
+        for instance in reservation['Instances']:
+            instant_temp = {}
+            instant_temp['InstanceId'] = instance['InstanceId']
+            instant_temp['PublicDnsName'] = instance['PublicDnsName']
+            instant_temp['PublicIpAddress'] = instance['PublicIpAddress']
+            instants_short.append(instant_temp)
+        
+    return json.dumps(instants_short, indent=4)
+
 ```
 
 ### Enable function URL to trigger via curl/browser
@@ -122,8 +135,13 @@ If you add or remove function from the configuratio tab --> Function URL.
 
 ```
 mahendran@mm-lab mahendran % curl https://uniquereftoyourfunction.lambda-url.us-east-1.on.aws/
-null%                                                                    
-mahendran@mm-lab mahendran %
+[
+    {
+        "InstanceId": "i-0efc9e4bbb5c9df74",
+        "PublicDnsName": "ec2-34-235-114-133.compute-1.amazonaws.com",
+        "PublicIpAddress": "34.235.114.133"
+    }
+]%                                                                                                    
 ```
 
 ## Alternatives
@@ -138,6 +156,8 @@ mahendran@mm-lab mahendran %
 - Creating IAM Permissions and Roles
 - Creating Lambda with Python
 - Enabling Function URL
+- EC2 ec2:Describe* API actions do not support resource-level permissions, so you cannot control which individual resources users can view in the console. Therefore, the * wildcard is necessary in the Resource element of the above statement
+- AWS gives free Elastic IP as long as we keep it running. Without Elastic IP, we may get different IP when instance restarted. Its good to share the Public DNS and IP when starting.
 
 
 ## Next steps
@@ -146,4 +166,6 @@ mahendran@mm-lab mahendran %
 - Schedule to start and stop EC2.
 
 ## Reference:
-https://aws.amazon.com/premiumsupport/knowledge-center/start-stop-lambda-eventbridge/
+- https://aws.amazon.com/premiumsupport/knowledge-center/start-stop-lambda-eventbridge/
+- https://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/
+- https://aws.amazon.com/premiumsupport/knowledge-center/elastic-ip-charges/
