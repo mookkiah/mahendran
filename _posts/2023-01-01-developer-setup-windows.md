@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Developer setup - Windows"
-date: 2021-01-01 15:15:00 -0400
-modified_date: 
+date: 2023-01-01 15:15:00 -0400
+modified_date: 2023-01-01 15:15:00 -0400
 categories: developer windows
 ---
 
@@ -48,6 +48,9 @@ Many application can be installed using Windows Package Manager `winget`. This i
 
 https://learn.microsoft.com/en-us/windows/package-manager/winget/
 
+Using  `winget` command you can search for application in windows store. If you prefer web interface to search use https://winget.run/
+
+
 
 ### VS Code
 ```sh
@@ -60,19 +63,43 @@ winget install -e --id Git.Git
 ```
 
 ### Oracle JDK
+Requires `Admin` rights
 ```sh
 winget install -e --id Oracle.JDK.17
 ```
 
+### Apache Directory Studio
+```sh
+winget install -e --id Apache.DirectoryStudio
+```
 
-## My Applications/Tools/Libraries list
+### NodeJS
+```
+winget install -e --id OpenJS.NodeJS
+```
 
-- Git
-- VS Code
-- Eclipse STS
-- JDK 11, 17
-- Maven
-- 
+### PostgreSQL 
+Requires `Admin` rights
+```sh
+winget install -e --id PostgreSQL.PostgreSQL
+```
+
+### AWS CLI
+```sh
+winget install -e --id Amazon.SAM-CLI
+```
+
+### Rancher Desktop
+Requires `Admin` rights
+```sh
+winget install -e --id suse.RancherDesktop
+```
+
+
+### Chef
+```sh
+winget install -e --id ChefSoftware.ChefDK
+```
 
 ## Keep updated
 It is good practice to keep the tooling upgraded to get the security fixes and use the new features which improves efficiency over the period of time and keep you stay ahead of the game.
@@ -85,5 +112,8 @@ While standards good for most of the developers. There are experts who manages t
 - Installing JDK
 - Switching JDK version
 - Upgrading Git
-- 
+- https://learn.microsoft.com/en-us/windows/package-manager/
+- https://learn.microsoft.com/en-us/windows/package-manager/winget/uninstall
+
+
 

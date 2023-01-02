@@ -2,6 +2,7 @@
 layout: post
 title: "Delegating AWS start and stop"
 date: 2022-12-10 08:05:00 -0400
+modified_date: 2023-01-01 21:30:00 -0400
 categories: aws
 ---
 
@@ -56,7 +57,12 @@ As there are multiple ways to meet the need. There are pros and cons in the impl
         "ec2:DescribeInstances"
       ],
       "Resource": "*"
-    }
+    },
+    {
+            "Effect": "Allow",
+            "Action": "sns:Publish",
+            "Resource": "arn:aws:sns:us-east-1:895650330533:MyAWSAlert"
+        }
   ]
 }
 ```
@@ -164,6 +170,7 @@ mahendran@mm-lab mahendran % curl https://uniquereftoyourfunction.lambda-url.us-
 - Send notification (email) when instance started or stopped
 - Automatically stop when instance is not used effectively (based on log)
 - Schedule to start and stop EC2.
+- Respond properly when instance not found (YAGNI).
 
 ## Reference:
 - https://aws.amazon.com/premiumsupport/knowledge-center/start-stop-lambda-eventbridge/
