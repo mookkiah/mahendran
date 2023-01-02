@@ -57,12 +57,7 @@ As there are multiple ways to meet the need. There are pros and cons in the impl
         "ec2:DescribeInstances"
       ],
       "Resource": "*"
-    },
-    {
-            "Effect": "Allow",
-            "Action": "sns:Publish",
-            "Resource": "arn:aws:sns:us-east-1:895650330533:MyAWSAlert"
-        }
+    }
   ]
 }
 ```
