@@ -37,4 +37,4 @@ To extract some attributes as CSV file
 
 ## Reference
 - https://learn.microsoft.com/en-us/powershell/module/activedirectory
-- [LDAP Queries](_posts/2022-02-12-ldap-queries-and-debugging.md)
+- [LDAP Queries]({% link _posts/2022-02-12-ldap-queries-and-debugging.md %})

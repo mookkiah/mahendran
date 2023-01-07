@@ -126,4 +126,4 @@ ldapsearch -H ldaps://ad.example.com:636 -x -D mahendran -w XXXXX  -b "dc=exampl
 
 
 ## References
-- [PowerShell ActiveDirectory Commands](_posts/2023-01-07-powershell-active-directory.md)
+- [PowerShell ActiveDirectory Commands]({% link _posts/2023-01-07-powershell-active-directory.md %})
