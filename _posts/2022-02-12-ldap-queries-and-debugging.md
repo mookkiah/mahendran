@@ -2,7 +2,7 @@
 layout: post
 title: "Using LDAP and AD"
 date: 2022-02-13 08:50:00 -0400
-modified_date: 2022-05-21 12:05:00 -0400
+modified_date: 2023-01-07 10:54:00 -0400
 categories: ldap
 ---
 
@@ -123,3 +123,7 @@ ldapsearch -H ldaps://ad.example.com:636 -x -D mahendran -w XXXXX  -b "dc=exampl
 ```
 
 ## Tips
+
+
+## References
+- [PowerShell ActiveDirectory Commands](_posts/2023-01-07-powershell-active-directory.md)
