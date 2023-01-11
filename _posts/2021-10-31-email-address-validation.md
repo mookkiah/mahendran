@@ -57,7 +57,7 @@ For easy discussion and grouping similar requirements closer, I am using the req
 | ID            | Title    | Description   | Comment     | 
 | :----:        |     :----:   |  :----:        | :----: |
 | R-1001        | Regex Format       | Standard Email format   | regex - TBD  |
-| R-1001- 101 | OWASP Recommended Format| Recommendation from [here](https://owasp.org/www-community/OWASP_Validation_Regex_Repository) | `^[a-zA-Z0-9_+&*-]+(?:\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$]`|
+| R-1001- 101 | OWASP Recommended Format| Recommendation from [here](https://owasp.org/www-community/OWASP_Validation_Regex_Repository) | `^[a-zA-Z0-9_+&*-]+(?:\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$`|
 | R-1002     | Legitimate domain        | Check the vailidity of address by checking the domain exists      |  |
 | R-1003 | Veriy MX records | Ask the MX server | Refer instruction - TBD|
 | R-1004 | Disposable email domain | Have a list of domains which offers disposable email | Organization/Client wide list |
