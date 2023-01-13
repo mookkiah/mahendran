@@ -2,6 +2,7 @@
 layout: post
 title: "Email Addresses validation"
 date: 2021-10-31 05:21:00 -0400
+modified_date:   2023-01-12 19:03:00  -0400
 categories: blog email-validation
 ---
 
@@ -128,7 +129,82 @@ Connection to gmail-smtp-in.l.google.com. port 2525 [udp/ms-v-worlds] succeeded!
 ```
 ### Verifying an email address with MX server
 
-This section will 
+This section will show how to check with the exchange domain whether the email address exists or not
+
+```
+root@my-linux:~# nslookup -q=mx google.com
+Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+google.com	mail exchanger = 10 smtp.google.com.
+
+Authoritative answers can be found from:
+
+root@my-linux:~#
+```
+
+Here is the sample response from exchange server when email address found.
+```
+root@my-linux:~# telnet smtp.google.com 25
+Trying 108.177.98.27...
+Connected to smtp.google.com.
+Escape character is '^]'.
+220 mx.google.com ESMTP f2-20020a63de02000000b00478d123065bsi18165819pgg.402 - gsmtp
+helo test
+250 mx.google.com at your service
+mail from: <your.email@gmail.com>
+250 2.1.0 OK f2-20020a63de02000000b00478d123065bsi18165819pgg.402 - gsmtp
+rcpt to: <your.email@gmail.com>
+250 2.1.5 OK f2-20020a63de02000000b00478d123065bsi18165819pgg.402 - gsmtp
+quit
+221 2.0.0 closing connection f2-20020a63de02000000b00478d123065bsi18165819pgg.402 - gsmtp
+Connection closed by foreign host.
+```
+
+Here is the sample response from exchange server when email address not found.
+```
+root@my-linux:~# telnet smtp.google.com 25
+Trying 74.125.20.26...
+Connected to smtp.google.com.
+Escape character is '^]'.
+220 mx.google.com ESMTP bm18-20020a656e92000000b004ace066f533si17174429pgb.177 - gsmtp
+helo test
+250 mx.google.com at your service
+mail from: <your.email@gmail.com>
+250 2.1.0 OK bm18-20020a656e92000000b004ace066f533si17174429pgb.177 - gsmtp
+rcpt to: <i_guess_no_one_will_have_this_address@gmail.com>
+550-5.1.1 The email account that you tried to reach does not exist. Please try
+550-5.1.1 double-checking the recipient's email address for typos or
+550-5.1.1 unnecessary spaces. Learn more at
+550 5.1.1  https://support.google.com/mail/?p=NoSuchUser bm18-20020a656e92000000b004ace066f533si17174429pgb.177 - gsmtp
+quit
+221 2.0.0 closing connection bm18-20020a656e92000000b004ace066f533si17174429pgb.177 - gsmtp
+Connection closed by foreign host.
+root@my-linux:~#
+```
+
+Sometime we get acceptance even though the email id doesnt exists
+```
+rcpt to: <i_guess_no_one_will_have_this_address@some.exchange.i.cant.share>
+250 2.1.5 <i_guess_no_one_will_have_this_address@some.exchange.i.cant.share>... Recipient ok
+```
+
+When sending email from an exchange to outside address, it should ask for authentication like this
+```
+rcpt to: <your.email@gmail.com>
+550 5.7.1 <your.email@gmail.com>... Relaying denied. Proper authentication required.
+```
+
+Another senario - relying denied when trying to outside exchange domain
+```
+mail from: <your.email@gmail.com>
+250 2.1.0 Sender ok
+rcpt to: <your.email@gmail.com>
+550 5.7.1 Relaying denied
+rcpt to: <your.email@same_domain_which_we_connected.com>
+250 2.1.5 Recipient ok
+```
 
 ### Maintaining Disposable Email Provider List
 
@@ -149,3 +225,8 @@ This section will
 I do follow the princible of `don't develop what you can download` (ofcourse from legitmate source). When I look for docker image which we could use as email address validator as REST service, I did not find one at this time of writing. Maybe not looked properly, please comment(Ah!, I have to find how to get comments on github pages :smile: ) if you find one. 
 
 So decided to write one and use the opportunity to learn a new web programming language.
+
+
+## References
+- https://learn.microsoft.com/en-us/exchange/mail-flow/connectors/allow-anonymous-relay
+- https://learn.microsoft.com/en-us/exchange/mail-flow/test-smtp-telnet
