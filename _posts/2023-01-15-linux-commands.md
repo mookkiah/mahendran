@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Infrequent Linux Commands"
+title: "Linux Commands"
 date: 2023-01-15 21:07:00 -0400
 modified_date: 2023-01-15 21:07:00 -0400
 categories: linux commands
