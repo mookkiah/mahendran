@@ -2,7 +2,7 @@
 layout: post
 title: "Linux Commands"
 date: 2023-01-15 21:07:00 -0400
-modified_date: 2023-01-15 21:07:00 -0400
+modified_date: 2023-01-28 07:26:00 -0400
 categories: linux commands
 ---
 
@@ -61,4 +61,11 @@ Distributor ID:	Ubuntu
 Description:	Ubuntu 22.04.1 LTS
 Release:	22.04
 Codename:	jammy
+```
+
+
+### Display - Session - Desktop
+
+```
+ls /usr/bin/*-session
 ```
