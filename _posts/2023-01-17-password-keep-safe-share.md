@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Kee Password Safely and Share Responsibility Securely"
+title: "Keep Password Safely and Share Responsibility Securely"
 date: 2023-01-17 00:03:00 -0400
 modified_date: 2023-01-28 07:45:00 -0400
 categories: security
