@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Microsoft License and service plan"
-date: 2023-29-12 03:52:00 -0400
-modified_date: 2023-29-12 03:52:00 -0400
+date: 2023-03-29 03:52:00 -0400
+modified_date: 2023-03-29 03:52:00 -0400
 categories: microsoft license
 ---
 
