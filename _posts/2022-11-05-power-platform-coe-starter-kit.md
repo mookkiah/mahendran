@@ -51,6 +51,7 @@ Gett started with setup - read prerequisites - use admin account - account must 
   - power_platform_users (required for `Add Maker to Group` flow - value for `admin_PowerPlatformUserGroupID`)
 - License - per user license as we work with multiple apps and assign it for above service account
 - Azure Active Directory app registration - to configure client id and secret to make Graph API calls by the COE starter kit.
+- If MFA enabled, it should have long expiration or conditional access - https://learn.microsoft.com/en-us/troubleshoot/power-platform/power-automate/conditional-access-and-multi-factor-authentication-in-flow
 
 ### Create Environment
 
@@ -91,6 +92,8 @@ After import of the Core components and before you turn on flows, set the value 
 This environment variable definition cannot be edited because it is in a managed solution.
 
 After changing the value of an environment variable, you'll need to turn off and on all the flows that use that environment variable to make sure the flows use the latest value.
+
+You will see banner message about missing the environment variables `current value`. Once you set them up, they disappear from the banner and the list on right pane. If you want to change/view the environment variable `current value`, go to https://make.powerautomate.com/ --> `Solutions` -> `Default solution` --> `Environment variables` --> use the context button on the variable to edit.
 
 Admin | Sync Template v3 --> Running this flow will also trigger the rest of the sync flows indirectly
 
