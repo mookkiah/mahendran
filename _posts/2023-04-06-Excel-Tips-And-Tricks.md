@@ -2,7 +2,7 @@
 layout: post
 title: "Excel Tips and Tricks for newbie"
 date: 2023-04-06 11:35:00 -0400
-modified_date: 2023-04-07 06:30:00 -0400
+modified_date: 2023-04-15 06:30:00 -0400
 categories: microsoft excel
 ---
 
@@ -44,3 +44,8 @@ I received 2 source of excel sheet and required to find the gap.
 - `VLOOKUP` returns a value if present or error out
 - `ISERROR` used to translate the ERROR into a boolean to represent FOUND or NOT FOUND
 - `NOT` used to make the data meaningful for the column heading. Ex: "Is found in S2?"
+
+## Find duplicate entries
+
+- Use `Home` --> `Conditional Formatting` --> `Highlight Cells Rules` --> `Duplicate Values` --> apply color on duplicate values
+- Use `Filter` column header and filter it `By Color`.
