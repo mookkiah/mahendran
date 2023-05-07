@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "ActiveDirectory PowerShell commands"
-date: 2023-01-07 10:22:00  -0400
-modified_date:
+date: 2023-01-07 10:22:00 -0400
+modified_date: 2023-05-07 09:20:00  -0400
 categories: powershell activedirectory
 ---
 
@@ -51,6 +51,20 @@ Alternatively we can get group membership object and filter name out of it.
 
 ```
 Get-ADPrincipalGroupMembership username | select name
+```
+
+To get AD Group
+
+```
+Get-ADGroup -Identity Group name
+```
+
+To get users who are member of a Group (child groups - recursive)
+
+```
+Get-ADGroupMember -Identity GroupName
+Get-ADGroupMember -Identity Administators
+Get-ADGroupMember -Identity "Enterprise Admins" -Recursive
 ```
 
 ## Reference
