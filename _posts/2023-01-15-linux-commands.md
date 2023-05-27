@@ -7,6 +7,7 @@ categories: linux commands
 ---
 
 ## Motivation
+
 This page has linux commands which I found useful and worth practicing frequently to help myself.
 
 ### Network related commands
@@ -17,6 +18,7 @@ wlp2s0    ESSID:"MYWIRELESS"
 ```
 
 ### Firewall commands
+
 ```
 root@ubuntu-22.04:~# ufw enable
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
@@ -26,10 +28,10 @@ Status: active
 
 To                         Action      From
 --                         ------      ----
-22/tcp                     ALLOW       Anywhere                  
-3389/tcp                   ALLOW       Anywhere                  
-22/tcp (v6)                ALLOW       Anywhere (v6)             
-3389/tcp (v6)              ALLOW       Anywhere (v6)             
+22/tcp                     ALLOW       Anywhere
+3389/tcp                   ALLOW       Anywhere
+22/tcp (v6)                ALLOW       Anywhere (v6)
+3389/tcp (v6)              ALLOW       Anywhere (v6)
 
 ```
 
@@ -38,7 +40,7 @@ To                         Action      From
 ```sh
 root@ubuntu-22.04:~$ uname -a
 Linux automation-mini-2 5.15.0-58-generic #64-Ubuntu SMP Thu Jan 5 11:43:13 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
-root@ubuntu-22.04:~$ cat /etc/os-release 
+root@ubuntu-22.04:~$ cat /etc/os-release
 PRETTY_NAME="Ubuntu 22.04.1 LTS"
 NAME="Ubuntu"
 VERSION_ID="22.04"
@@ -51,7 +53,7 @@ SUPPORT_URL="https://help.ubuntu.com/"
 BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 UBUNTU_CODENAME=jammy
-root@ubuntu-22.04:~$ 
+root@ubuntu-22.04:~$
 ```
 
 ```
@@ -63,9 +65,17 @@ Release:	22.04
 Codename:	jammy
 ```
 
-
 ### Display - Session - Desktop
 
 ```
 ls /usr/bin/*-session
+```
+
+### Using sed
+
+At times we may not have the luxury of the GUI editor or VI editor to make small changes.
+If `sed` command available, we could use it
+
+```
+sed -i  's/find-string/replace-all/g' file.txt
 ```
