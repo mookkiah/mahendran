@@ -33,7 +33,7 @@ categories: data
 - Data needs to be protected for various reasons
   - Privacy - personal information to meet PII complaince
   - Corruption/Altered - When we let the AI and ML to take decisions, data should be trustworthy.
-  - Damage - we learned for decades a simple comma or unexpected charactor halt the system. So it is easy for bad actor to create denial of service if data is not protected.
+  - Damage - we learned this for decade that a comma or unexpected charactor halts the system. So it is easy for bad actor to create denial of service if data is not protected.
   - security (ofcourse)
 
 ## Governance
