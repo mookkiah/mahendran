@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Data to Value and Governance"
+title: "Understanding Investment"
 date: 2023-05-27 10:00:00 -0400
 modified_date: 2023-05-27 10:00:00 -0400
 categories: business investment
