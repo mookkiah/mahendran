@@ -11,7 +11,7 @@ categories: sso logout
 [Mahabharata Abhimanyu](https://www.nhsf.org.uk/2005/12/mahabharata-abhimanyu-and-the-chakra-vyuha/), the courageous son of the great Arjuna learned the technique to penetrate into Chakra-vyuha but did learned about getting out of it.
 
 One way, we can't blame him (baby on the womb) learning as his uncle left without teaching as he finds her mom feel asleep.
-Another way, he could have learned as he grow up (maybe due to other priorities).
+Another way, he could have learned as he grow up (poor boy with other priorities or considered that as [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it)).
 
 Thinking of Abhimanyu's situaton when making an application user login successfully and not able to logout. Many IDP providers, Application developers, SSO implementers, and business analysts missed or payed less attention on logout compared to the login flow of single sign on.
 
@@ -19,10 +19,10 @@ In this page, I am describing my understanding of why it is complex and what com
 
 ## Major specifications related to SSO
 
-- SAML
-- OIDC
-- WS-FED
-- PassportJS
+- [SAML](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0.html)
+- [OIDC](https://openid.net/specs/openid-authentication-2_0.html)
+- [WS-FED](http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation-1.2-spec-os.html)
+- [PassportJS](https://www.passportjs.org/packages/)
 
 Even though there are many specification, all of them solves common problem in the way layman can expects the login and logout to work.
 For next few section, I refrain myself avoiding technical terms.
