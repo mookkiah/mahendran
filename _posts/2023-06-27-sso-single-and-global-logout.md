@@ -58,12 +58,14 @@ In this scenario, when the user clicks logout, application reaches out IDP to lo
 
 This method is more complicated as the trust getting transferred across multiple systems. Many variotions of this named like includes chained federation, social login, passport login, cross-tenant etc.,
 
-https://gitlab.com/users/sign_in allows to login with Google, Github, Twitter, Bitbucket, Salesforce
-https://www.linkedin.com/ allows to login with Google
-https://login.salesforce.com/ allows to login with custom domain (with your company domain)
-https://breadbutter.io/ allows to login with
-https://kanboard.discourse.group/ allows to login with github, gitlab
-https://office.com allows to login with your company/personal microsoft office 365 account
+Here are few federation or social login examples
+
+- https://gitlab.com/users/sign_in allows to login with Google, Github, Twitter, Bitbucket, Salesforce
+- https://www.linkedin.com/ allows to login with Google
+- https://login.salesforce.com/ allows to login with custom domain (with your company domain)
+- https://breadbutter.io/ allows to login with
+- https://kanboard.discourse.group/ allows to login with github, gitlab
+- https://office.com allows to login with your company/personal microsoft office 365 account
 
 <img src="/assets/images/chained-login.png">
 
