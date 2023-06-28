@@ -2,7 +2,7 @@
 layout: post
 title: "SSO - Single and Global Logout"
 date: 2023-06-27 21:30:00 -0400
-modified_date: 2023-06-27 22:30:00 -0400
+modified_date: 2023-06-28 4:56:00 -0400
 categories: sso logout
 ---
 
@@ -43,7 +43,7 @@ When authentication is managed by the application, the application has full cont
 
 #### Single Logout
 
-SSO aims to ask the user to log in once and then allows them to bypass login for other integrated applications seamlessly. Some IDPs offer logout for the application where the user initiated the login. However, this is not really useful from a security standpoint as it MAY leave the IDP still logged in. Some IDPs will ask the user to log in if the same application initiates the login process. However, this allows other applications to continue to stay logged in, leading to confusion. This is mostly due to the IDP's flexibility to configure and incomplete/incorrect setup.
+SSO is meant to ask the user to login once and then allows them to bypass login for other integrated applications seamlessly. Some IDPs offer logout for the application where the user initiated the login. However, this is not really useful from a security standpoint as it MAY leave the IDP still logged in. Some IDPs will ask the user to log in if the same application initiates the login process. However, this allows other applications to continue to stay logged in, leading to confusion. This is mostly due to the IDP's flexibility to configure and incomplete/incorrect setup.
 
 
 #### Global Logout
