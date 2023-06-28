@@ -8,14 +8,15 @@ categories: sso logout
 
 ## Motivation
 
-[Mahabharata Abhimanyu](https://www.nhsf.org.uk/2005/12/mahabharata-abhimanyu-and-the-chakra-vyuha/), the courageous son of the great Arjuna learned the technique to penetrate into Chakra-vyuha but did learned about getting out of it.
+[Mahabharata Abhimanyu](https://www.nhsf.org.uk/2005/12/mahabharata-abhimanyu-and-the-chakra-vyuha/), the courageous son of the great Arjuna, learned the technique to penetrate the Chakra-vyuha but did not learn how to get out of it.
 
-One way, we can't blame him (baby on the womb) learning as his uncle left without teaching as he finds her mom feel asleep.
-Another way, he could have learned as he grow up (poor boy with other priorities or considered that as [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it)).
+One way we can't blame him (as a baby in the womb) for not learning, as his uncle left without teaching him when he found his mother asleep. Another way, he could have learned as he grew up (poor boy with other priorities or considering it as [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it)).
 
-Thinking of Abhimanyu's situaton when making an application user login successfully and not able to logout. Many IDP providers, Application developers, SSO implementers, and business analysts missed or payed less attention on logout compared to the login flow of single sign on.
 
-In this page, I am describing my understanding of why it is complex and what components are all holds responsibility to complete the logout flow. Also share some of the opensource products and their level of completion as per my knowledge and at the time of writing.
+
+Thinking of Abhimanyu's situation, when making an application, the user can log in successfully but not able to log out. Many IDP providers, application developers, SSO implementers, and business analysts missed or paid less attention to the logout process compared to the login flow of single sign-on.
+
+In this page, I am describing my understanding of why it is complex and which components are responsible for completing the logout flow. I will also share some of the open-source products and their level of completion as per my knowledge and at the time of writing.
 
 ## Major specifications related to SSO
 
@@ -24,41 +25,44 @@ In this page, I am describing my understanding of why it is complex and what com
 - [WS-FED](http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation-1.2-spec-os.html)
 - [PassportJS](https://www.passportjs.org/packages/)
 
-Even though there are many specification, all of them solves common problem in the way layman can expects the login and logout to work.
-For next few section, I refrain myself avoiding technical terms.
+Although there are many specifications, all of them solve the common problem of how a layman expects the login and logout processes to work. 
+
+For the next few sections, I will try refraining from using technical terms.
 
 ## Login and Logout Flow
 
-Reference diagram to understand flow at differnt scenarios.
+Please refer to the diagram below to understand the flow in different scenarios.
 
 <img src="/assets/images/sso-logout.png">
 
 ### Application Managed Authentication
 
-When the authentication managed by the application, application has full control how the login page should look like, how to validate user credential and where to take the user upon login/logout step.
+When authentication is managed by the application, the application has full control over how the login page should look, how to validate user credentials, and where to take the user upon login/logout steps.
 
 ### SSO Logout Types
 
 #### Single Logout
 
-SSO meant to ask the user to login once and allow to bypass login for other integrated application seemlessly. Some IDP offers logout for the application where user initiated the login. But it is not really useful from security standpoint as it MAY leave the IDP still logged in. Some IDP will ask for user to login if the same application initiates login process. However it will let other application continue to stay logged in.
-This is where more confusion happens. It is mostly because IDP's flexibility to configure and the incomplete/incorrect setup.
+SSO aims to ask the user to log in once and then allows them to bypass login for other integrated applications seamlessly. Some IDPs offer logout for the application where the user initiated the login. However, this is not really useful from a security standpoint as it MAY leave the IDP still logged in. Some IDPs will ask the user to log in if the same application initiates the login process. However, this allows other applications to continue to stay logged in, leading to confusion. This is mostly due to the IDP's flexibility to configure and incomplete/incorrect setup.
+
 
 #### Global Logout
 
-When user initiates logout in any one of the integrated application, IDP properly performs the logout by propagating the user intent to leave the system at its BEST effort to logout by triggering all application to terminate the user session. In order to achive full security, ALL the application must be configured with the logout setting which allows it without asking any user interaction. Not all application supports this. It is not guarenteed as well.
+When a user initiates logout in any one of the integrated applications, the IDP properly performs the logout by propagating the user's intent to leave the system at its BEST effort to logout by triggering all applications to terminate the user session. To achieve full security, ALL applications must be configured with the logout setting that allows it without asking for any user interaction. However, not all applications support this, and it is not guaranteed either.
+
 
 ### SSO Identity Provider (IDP) Managed Authentication
 
-When the authentication managed by a SSO solution(IDP), application does not control the login page. Control between application and IDP exchanged via browser redirects. So the setup process involves exchanging urls to redirect after successful login and logout.
+When authentication is managed by an SSO solution (IDP), the application does not control the login page. Control between the application and IDP is exchanged via browser redirects. The setup process involves exchanging URLs to redirect after successful login and logout.
 
-In this scenario, when the user clicks logout, application reaches out IDP to logout. IDP will propagate the intent to logout to all logged in applications (this is not visible to the user). Upon successful logout, it redirects the user to the configured logout page by the application which originates the logout.
+In this scenario, when the user clicks logout, the application reaches out to the IDP to logout. The IDP will propagate the intent to logout to all logged-in applications (this is not visible to the user). Upon successful logout, it redirects the user to the configured logout page by the application that originated the logout.
 
 ### SSO Federated login
 
-This method is more complicated as the trust getting transferred across multiple systems. Many variotions of this named like includes chained federation, social login, passport login, cross-tenant etc.,
+This method is more complicated as trust is transferred across multiple systems. There are many variations of this, such as chained federation, social login, passport login, cross-tenant, etc.
 
-Here are few federation or social login examples
+
+Here are a few examples of federation or social login:
 
 - https://gitlab.com/users/sign_in allows to login with Google, Github, Twitter, Bitbucket, Salesforce
 - https://www.linkedin.com/ allows to login with Google
@@ -86,8 +90,10 @@ Now you can see the trust is formed as chain. User may click logout in any one o
 
 ---
 
-If ALL these applications and IDP properly implements the global logout with propogation, user can click logout once to terminate all the sessions.
+If ALL these applications and the IDPs are properly implement global logout with propagation, the user can click logout once to terminate all the sessions. 
+
 If you are curious, try it out.
+
 
 ## References
 
