@@ -24,7 +24,7 @@ Download latest windows version of Rancher Desktop from [here](https://github.co
 Just like any other windows installable software, double click the downloaded software (.msi file) to begin the installation.
 
 ### Read and agree to the license
-<img src="assets/images/rancher-desktop/license-aggrement.png" alt="rancher desktop license"/>
+<img src="/assets/images/rancher-desktop/license-aggrement.png" alt="rancher desktop license"/>
 
 ### Understanding Windows Subsystem for Linux 2(WSL2)
 One of the prerequsite for running Kubernetes is the underlying operating system should allow virtualization.
@@ -35,36 +35,36 @@ Rancher Desktop helps us to manage Kubernetes installation. The actual container
 
 Incase WSL2 is not available in the operating system, the setup will install it.
 
-<img src="assets/images/rancher-desktop/wsl-2-install.png" alt="install wsl2" />
+<img src="/assets/images/rancher-desktop/wsl-2-install.png" alt="install wsl2" />
 
 ### Installation in progress
 
-<img src="assets/images/rancher-desktop/install-in-progress.png" alt="Rancher Desktop installation in progress" />
+<img src="/assets/images/rancher-desktop/install-in-progress.png" alt="Rancher Desktop installation in progress" />
 
 ### Open Rancher Desktop app
 Navigate or Open Rancher Desktop app from Windows app search.
 
-<img src="assets/images/rancher-desktop/open-rancher-desktop.png" alt="Open Rancher Desktop">
+<img src="/assets/images/rancher-desktop/open-rancher-desktop.png" alt="Open Rancher Desktop">
 
 ### Enable Kubernetes
 Rancher desktop brings the ablity to run container images. It is required to enable Kubernetes explicitly.
 
 You have option to select the Kubernetes version.
 
-<img src ="assets/images/rancher-desktop/enable-kubernetes.png" alt="Enable Kubernetes" />
+<img src ="/assets/images/rancher-desktop/enable-kubernetes.png" alt="Enable Kubernetes" />
 
 
 ### Verifying the install
 
 Installation complete. We can check information about the install.
 
-<img src="assets/images/rancher-desktop/result-validation.png" alt="Rancher Desktop verification" />
+<img src="/assets/images/rancher-desktop/result-validation.png" alt="Rancher Desktop verification" />
 
 ### Troubleshooting
 In case of chalenge or redeploy and test your infrastructure as code, or you just want to start fresh, it is easier to do factory reset.
 
 
-<img src="assets/images/rancher-desktop/troubleshooting.png" alt ="troubleshooting" />
+<img src="/assets/images/rancher-desktop/troubleshooting.png" alt ="troubleshooting" />
 
 # References
 - https://rancherdesktop.io/
