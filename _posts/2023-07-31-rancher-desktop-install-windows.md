@@ -51,7 +51,7 @@ Rancher desktop brings the ablity to run container images. It is required to ena
 
 You have option to select the Kubernetes version.
 
-<img src ="assets/images/rancher-desktop/enable-kubernetes.png" alt="Enable Kubernetes' />
+<img src ="assets/images/rancher-desktop/enable-kubernetes.png" alt="Enable Kubernetes" />
 
 
 ### Verifying the install
