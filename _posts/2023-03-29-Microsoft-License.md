@@ -2,7 +2,7 @@
 layout: post
 title: "Microsoft License and service plan"
 date: 2023-03-29 03:52:00 -0400
-modified_date: 2023-03-29 03:52:00 -0400
+modified_date: 2023-08-02 28:55:00 -0400
 categories: microsoft license
 ---
 
@@ -22,19 +22,44 @@ I noticed users levels of access to certain microsoft features getting added and
 
 ## FAQ
 
-- Where can I see the license assigned to me?
+### Microsoft licence assigned or subscriptions
 
-  - https://portal.office.com/account/?ref=MeControl#subscriptions
+Where can I see the license assigned to me?
 
-- As an MS Administrator, where can I find the licenses purchased for my organization?
+[https://portal.office.com/account/?ref=MeControl#subscriptions](https://portal.office.com/account/?ref=MeControl#subscriptions)
 
-  - Go to https://portal.azure.com --> Search/Navigate `Licenses` --> click `All Products` (https://portal.azure.com/#view/Microsoft_AAD_IAM/LicensesMenuBlade/~/Overview)
+### signin / login activities
 
-- As an MS Administrator, how can I view licenses assigned for particular user?
+Where can I see my (user) login activities?
+
+https://mysignins.microsoft.com/
+
+
+### My Organization subscription/products
+As an MS Administrator, where can I find the licenses purchased for my organization?
+
+Go to https://portal.azure.com --> Search/Navigate `Licenses` --> click `All Products` (https://portal.azure.com/#view/Microsoft_AAD_IAM/LicensesMenuBlade/~/Overview)
+
+### User license / subscription assignment
+
+As an MS Administrator, how can I view licenses assigned for particular user?
+
   - Go to https://portal.azure.com --> Search/Navigate `Azure Active Directory` --> click `Users` --> search the user --> Navigate to the user --> click licenses.
   - Refer `Assignment Paths` to understand how (from which security group) the user got the license assignment
 
-## PowerShell commands
+
+## Licenses and short descriptions
+
+|  Name |  Notes |  
+|---|---|
+| Project for Office (Plan E1)  |   | 
+| Common Data Service  |   |   
+| Education Analytics |   |   
+| Microsoft Search    |   | 
+| Whiteboard (Plan 1) |   |
+| SharePoint (Plan 1) for Education |   |
+
+
 
 ## Resources:
 
