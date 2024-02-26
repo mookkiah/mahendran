@@ -122,3 +122,75 @@ https://learn.mongodb.com/learn/course/mongodb-self-managed-database-security/le
 - How often do you review the audit report?
 - Who is incharge of reviewing the audit? There is no value if it is not planned to do.
 - Did you enable encryption at-rest, in-transit and in-use?
+
+## MongoDB Atlas Security
+
+### Lesson 1: Intro
+
+https://learn.mongodb.com/learn/course/mongodb-atlas-security/lesson-1-introduction-to-security/learn
+
+- Authentication
+- Authorization
+- Auditing
+  - to analyze security incidents
+  - for complaince purpose
+
+### Lesson 2: The Atlas User Management Model
+
+- Atlas User
+  - Responsible for managing
+    - Organization
+    - Projects
+    - Database Users
+    - Billing
+  - Built-In Roles
+    - Project Owner
+    - Project Cluster Manager
+    - Project Data Access Admin
+    - Project Data Access Read/Write
+    - Project Data Access Read Only
+- Database User
+  - Authentication
+    - SCRAM
+    - X.509
+    - AWS IAM
+  - Built-In Roles
+    - atlasAdmin
+    - readWriteAnyDatabase
+    - readAnyDatabase
+
+### Lesson 3: Atlas User Management
+
+- Atlas provides hierarchy of access
+- provides multi-factor authentication (MFA)
+
+#### CLI Commands
+
+```
+atlas projects list --orgID 1234
+atlas projects organizations invitations invite ...
+atlas projects users list
+atlas projects user delete ...
+```
+
+https://learn.mongodb.com/learn/course/mongodb-atlas-security/lesson-3-atlas-user-management/learn?client=customer&page=2
+
+```
+root@mongodb:~$ atlas projects invitations invite test.user@mongodb.com --role GROUP_READ_ONLY
+root@mongodb:~$ atlas projects invitations list
+ID                         USERNAME                CREATED AT                      EXPIRES AT
+65dc68f235aac70ddc602409   test.user@mongodb.com   2024-02-26 10:33:22 +0000 UTC   2024-03-27 10:33:22 +0000 UTC
+root@mongodb:~$ atlas organizations invitations list --orgId 1234567890
+ID                         USERNAME                CREATED AT                      EXPIRES AT
+65dc68f235aac70ddc602409   test.user@mongodb.com   2024-02-26 10:33:22 +0000 UTC   2024-03-27 10:33:22 +0000 UTC
+root@mongodb:~$ atlas project invitations delete 65dc68f235aac70ddc602409
+? Are you sure you want to delete: 65dc68f235aac70ddc602409 Yes
+Invitation '65dc68f235aac70ddc602409' deleted
+root@mongodb:~$ atlas organizations invitations list --orgId 1234567890
+ID    USERNAME   CREATED AT   EXPIRES AT
+```
+
+### Questions
+
+- How often do you review/audit the principle of least privilege
+- Are you using the expiring access for your higher environments?
