@@ -2,7 +2,7 @@
 layout: post
 title: "Data to Value and Governance"
 date: 2023-05-07 09:03:00 -0400
-modified_date: 2023-05-07 09:03:00 -0400
+modified_date: 2024-04-05 15:45:00 -0400
 categories: data
 ---
 
@@ -71,6 +71,36 @@ It is important to identify individuals and add the data classification duties a
 - Data creators - When user input or integration brings data, data creator ask themselves to classify the level and make it clear to the others who handles it.
 - Data user - people or system who process data. Need to respect the classification and standards.
 - Data custodian - infrastructure provider to store, transfer data who is aligning wiht security advisors.
+
+## Role of Chief Data Officer (CDO)
+
+- Define Data Strategy
+
+  - Owning Data Governance
+  - Enable data usability, availability for efficient operation
+  - Drive digital transfromation and innovation
+  - Dependable and Measurable KPI with marketable analytic and reports
+  - Monetize data securely
+
+- Build Teams
+  - Data governance
+  - API enablement
+  - Data science
+  - Data Analytics
+
+### Data Governance Team
+
+- Enable ease of accss
+- Treat data as asset and measure it - Define KPIs
+- Define data qualify rules
+- Identify relationship between data and defind relationship policies.
+- Promote data citizen
+  - Break silos
+  - Educate ROI
+  - Enable tooling
+  - Estabilish common understanding
+  - Data owners and stewards who care about data quality
+- Define governance KPI
 
 ## References
 
