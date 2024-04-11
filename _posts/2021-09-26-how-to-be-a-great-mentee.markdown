@@ -2,8 +2,8 @@
 layout: post
 title: "How to Be a Great Mentee"
 date: 2021-09-26 19:03:00 -0400
-modified_date: 2023-08-09 09:20:00 -0400
-categories: jekyll update
+modified_date: 2024-04-11 05:51:00 -0400
+categories: leadership mentor
 ---
 
 During our school days, we followed discipline and showed much respect to our teachers. Teachers want their students to gain more knowledge and dream of growing better than themselves. They are always proud to say, "That is my student!"
@@ -87,3 +87,8 @@ These posters may seem funny, but they can also be a sign of frustration when a 
 ## Closing comment
 
 Be thankful for having a mentor and respect them as you would your teacher. They can help set the foundation for your growth. Show your respect and make them proud of you by following meeting etiquette and listening actively. Remember that it is hard to find a good mentor like your favorite teacher, but it is easy to miss one.
+
+
+## Update
+- This article refined and posted in [https://toastmastersd84.org/effective-toastmasters-mentorship/](Toastmasters 84 synergy newsletter)
+  
