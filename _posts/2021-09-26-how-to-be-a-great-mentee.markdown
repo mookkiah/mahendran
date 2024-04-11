@@ -90,5 +90,5 @@ Be thankful for having a mentor and respect them as you would your teacher. They
 
 
 ## Update
-- This article refined and posted in [https://toastmastersd84.org/effective-toastmasters-mentorship/](Toastmasters 84 synergy newsletter)
+- This article refined and posted in [Toastmasters 84 synergy newsletter](https://toastmastersd84.org/effective-toastmasters-mentorship/)
   
