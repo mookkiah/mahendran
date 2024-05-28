@@ -2,7 +2,7 @@
 layout: post
 title: "Networking Commands"
 date: 2023-11-29 03:30:00 -0500
-modified_date: 2023-11-29 03:30:00 -0500
+modified_date: 2024-05-28 03:27:00 -0500
 categories: network
 ---
 
@@ -46,7 +46,28 @@ Address:	12.32.0.1#53
 
 Non-authoritative answer:
 *** Can't find cluster0.random.mongodb.net: No answer
+```
 
+To debug add `-debug`
+
+```
+$ nslookup -debug google.com
+Server:         100.64.0.1
+Address:        100.64.0.1#53
+
+------------
+    QUESTIONS:
+        google.com, type = A, class = IN
+    ANSWERS:
+    ->  google.com
+        internet address = 142.250.217.238
+        ttl = 54
+    AUTHORITY RECORDS:
+    ADDITIONAL RECORDS:
+------------
+Non-authoritative answer:
+Name:   google.com
+Address: 142.250.217.238
 ```
 
 ### dig
@@ -142,8 +163,14 @@ $ traceroute google.com
 
 ### Debugging tools
 
-In linux (Ubuntu), to get some basic commands, install net-tools.
+In linux (Ubuntu), to get some basic commands (ex: dig, nslookup), install them using following commands.
 
 ```
 $ sudo apt install net-tools
+```
+
+or in AWS cloudshell...
+
+```
+$ sudo yum install -y bind-utils
 ```
