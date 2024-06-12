@@ -2,8 +2,8 @@
 layout: post
 title: "AWS Workspaces"
 date: 2023-09-20 03:42:00 -0400
-modified_date: 2023-09-20 03:42:00 -0400
-categories: aws template
+modified_date: 2024-06-12 15:39:00 -0400
+categories: aws workspaces
 ---
 
 # AWS Workspaces
@@ -33,17 +33,104 @@ categories: aws template
 ## Useful AWS commands
 
 ```
+aws ds describe-directories
 aws workspaces describe-workspaces
-aws workspaces describe-workspaces --output table
+aws workspaces describe-workspaces --directory-id <value> --user-name <value>
 aws workspaces describe-workspace-directories
+aws ds delete-directory --directory-id <value>
+```
 
+To get workspace used by a specific user.
 
 ```
+aws workspaces describe-workspaces --directory-id <value> --user-name <value>
+```
+
+Before doing any manitenance activity, workspace state should be changed to maintanence mode.
+
+```
+aws workspaces modify-workspace-state --workspace-id ws-id --workspace-state ADMIN_MAINTENANCE
+aws workspaces modify-workspace-state --workspace-id ws-id --workspace-state AVAILABLE
+```
+
+https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html
+
+#### Migrate workspace
+
+```
+Your WorkSpaces are being migrated.
+The migration process has started. New WorkSpaces are being created:
+
+New WorkSpace ID ws-newid
+
+If the WorkSpace migration fails, the WorkSpace will be automatically rolled back to its pre-migration state.
+```
+
+#### Create Image
+
+In UI, select workspace -> Actions --> Crate image
+
+```
+The image was successfully created.
+The WorkSpace image wsi-imageid was successfully created. To view more details about this image, visit the image details page.
+```
+
+```
+aws workspaces create-workspace-image --name sandbox-image --workspace-id
+```
+
+Example
+
+```
+[cloudshell-user@ip-10-123-45-67 ~]$ aws workspaces create-workspace-image --name mahendran-image --workspace-id ws-id --description "initial setup of developer machine"
+{
+    "ImageId": "wsi-id",
+    "Name": "mahendran-image",
+    "Description": "initial setup of developer machine",
+    "OperatingSystem": {
+        "Type": "WINDOWS"
+    },
+    "State": "PENDING",
+    "RequiredTenancy": "DEFAULT",
+    "Created": "2025-01-15T21:37:38.940000+00:00",
+    "OwnerAccountId": "123456789"
+}
+[cloudshell-user@ip-10-130-81-74 ~]$ aws workspaces describe-workspace-images --image-ids wsi-id
+```
+
+When creating image, the source workspace goes to `SUSPENDED` state. Also it takes long time to create the image. Until it is ready, the status of the image is in `PENDING` state.
+
+Once image created, you can copy to another region (not all the region available as target to copy - why?)
+
+You can run this command from the target region or use `--region` to specify the target region.
+
+```
+aws workspaces copy-workspace-image \
+--name <name-of-the-image-at-target> \
+--source-image-id <value>
+--source-region <value>
+```
+
+#### Create workspaces
+
+```
+aws workspaces create-workspaces \
+    --workspaces DirectoryId=d-926722edaf,UserName=Mary,BundleId=wsb-0zsvgp8fc,WorkspaceProperties={RunningMode=AUTO_STOP}
+
+```
+
+#### Importing image
+
+If you are migrating from on-prem or trasfering from EC2, you can use `import-workspace-image` command
 
 ### Cost saving or clean up after experiments
 
+#### Delete or Terminate workspaces
+
+! Careful - Can't be undone.
+
 ```
-aws workspaces terinate-workspaces --terminate-workspace-requests <workspace id(s)>
+aws workspaces terminate-workspaces --terminate-workspace-requests <workspace id(s)>
 ```
 
 ## Pricing Notes
@@ -52,7 +139,7 @@ aws workspaces terinate-workspaces --terminate-workspace-requests <workspace id(
 
 ```
 aws workspaces describe-workspaces-connection-status  --output table
-aws workspaces describe-workspaces --workspace-id <workspace-id>
+aws workspaces describe-workspaces --workspace-id <workspace-id> --output json
 ```
 
 To find what are the workspaces connected before/after certain time
@@ -119,6 +206,8 @@ Resources:
         VpcId: !Ref vpcID
 ```
 
+Note: AD and AD Connector are made available for your WorkSpace free of charge. If there is no WorkSpace being used with your Simple AD or AD Connnector for 30 days, you might be charged for this directory
+
 ### CloudFormation Template
 
 ```
@@ -133,6 +222,7 @@ Resources:
 - [Best Practices Workspace VPC](https://d1.awsstatic.com/whitepapers/best-practices-vpcs-networking-amazon-workspaces-deployments.pdf)
 - [Cost optimizer for workspaces](https://docs.aws.amazon.com/solutions/latest/cost-optimizer-for-workspaces/overview.html)
 - [Youtube - Deploying Directory using CloudFormation](https://www.youtube.com/watch?v=6QLjyxylNDQ)
+- [Need resilient workspace?](https://docs.aws.amazon.com/workspaces/latest/adminguide/multi-region-resilience.html)
 
 ## Problems and Solutions
 
@@ -154,6 +244,14 @@ An error occurred (UnauthorizedResourceAccessException) when calling the Describ
 You need permissions
 You do not have the permission required to perform this operation. Ask your administrator to add permissions.
 User: arn:aws:iam::account:user/mahendran is not authorized to perform: ds:ResetUserPassword on resource: arn:aws:ds:eu-west-1:account:directory/d-dirID because no identity-based policy allows the ds:ResetUserPassword action
+```
+
+Go to `Directory Service` instead of `Workspace -> Directories` to reset user password
+
+### Capacity constraint
+
+```
+Resource handler returned message: "Failed to locate Availability Zone: us-west-2d corresponding to subnet: <subnet-id>. This availability zone may be capacity constrained. : RequestId: f08c14ac-a83c-uuid-c2d6706d5bf6 (Service: Directory, Status Code: 400, Request ID: f08c14ac-uudi-c2d6706d5bf6)" (RequestToken: 1642d8fa-uuid-77a3456422b1, HandlerErrorCode: GeneralServiceException)
 ```
 
 ### Manage Directory
