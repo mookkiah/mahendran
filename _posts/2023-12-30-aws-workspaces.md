@@ -46,7 +46,7 @@ To get workspace used by a specific user.
 aws workspaces describe-workspaces --directory-id <value> --user-name <value>
 ```
 
-Before doing any manitenance activity, workspace state should be changed to maintanence mode.
+Before doing any manitenance activity, workspace state should be started and changed to maintanence mode.
 
 ```
 aws workspaces modify-workspace-state --workspace-id ws-id --workspace-state ADMIN_MAINTENANCE
@@ -76,7 +76,16 @@ The WorkSpace image wsi-imageid was successfully created. To view more details a
 ```
 
 ```
-aws workspaces create-workspace-image --name sandbox-image --workspace-id
+aws workspaces start-workspaces --start-workspace-requests WorkspaceId=ws-id
+aws workspaces create-workspace-image --name sandbox-image --workspace-id ws-id
+```
+
+Note: The WorkSpace must not be encrypted. Image creation from an encrypted WorkSpace is not currently supported.
+
+```
+$ aws workspaces create-workspace-image --name sandbox-image --workspace-id  ws-id --description 'it is an encrypted image '
+
+An error occurred (OperationNotSupportedException) when calling the CreateWorkspaceImage operation: The operation couldn't be performed on the specified WorkSpace. Confirm that the WorkSpace is not encrypted and try again.
 ```
 
 Example
