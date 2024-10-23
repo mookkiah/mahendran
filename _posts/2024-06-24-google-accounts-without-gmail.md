@@ -29,10 +29,10 @@ https://admin.google.com/ac/domains/allowlisted
 
 ## Creating Google account with external domain
 
-- Logout previously logged in google accounts
+- Logout previously logged in google accounts or open browser in "private browsing / incognito" mode
   <img src="/assets/images/google-with-external-account-1.png">
 
-- At the sign in screen, follow create account flow
+- At the sign in screen, follow create account flow. Choose "For work or my business"
   <img src="/assets/images/google-with-external-account-2.png">
 
 - Fill the required fields
