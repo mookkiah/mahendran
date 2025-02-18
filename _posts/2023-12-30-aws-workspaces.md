@@ -2,7 +2,7 @@
 layout: post
 title: "AWS Workspaces"
 date: 2023-09-20 03:42:00 -0400
-modified_date: 2024-06-12 15:39:00 -0400
+modified_date: 2025-02-15 20:04:00 -0400
 categories: aws workspaces
 ---
 
@@ -20,7 +20,7 @@ categories: aws workspaces
 - The WorkSpaces service requires a minimum of
   two subnets to operate, each in a different Availability Zone (AZ).
 - PCoIP (port 4172) --> PC over IP
-- WSP (port 4195) --> WorkSpaces Streaming Protocol
+- WSP (port 4195) --> WorkSpaces Streaming Protocol - now as Desktop Cloud Visualization(DCV)
 - Client applications use port 4172 (PCoIP) and port 4195 (WSP) for pixel streaming to the WorkSpace and ports 4172 and 4195 for network health checks
 - A WorkSpace bundle is a combination of an operating system, and storage, compute, and software resources
 
@@ -77,7 +77,7 @@ The WorkSpace image wsi-imageid was successfully created. To view more details a
 
 ```
 aws workspaces start-workspaces --start-workspace-requests WorkspaceId=ws-id
-aws workspaces create-workspace-image --name sandbox-image --workspace-id ws-id
+aws workspaces create-workspace-image --name sandbox-image --description 'image creation reason' --workspace-id ws-id
 ```
 
 Note: The WorkSpace must not be encrypted. Image creation from an encrypted WorkSpace is not currently supported.
@@ -146,9 +146,9 @@ aws workspaces terminate-workspaces --terminate-workspace-requests <workspace id
 
 - Identify less never or frequently used workspaces and decommision it
 
-```
-aws workspaces describe-workspaces-connection-status  --output table
-aws workspaces describe-workspaces --workspace-id <workspace-id> --output json
+```sh
+$ aws workspaces describe-workspaces-connection-status  --output table
+$  <workspace-id> --output json
 ```
 
 To find what are the workspaces connected before/after certain time
@@ -160,8 +160,10 @@ aws workspaces describe-workspaces-connection-status --query 'WorkspacesConnecti
 
 Client side sort using `jq`
 
-```
-aws workspaces describe-workspaces-connection-status | jq -s 'sort_by(.LastKnownUserConnectionTimestamp)'
+```sh
+$ aws workspaces describe-workspaces-connection-status | jq -s 'sort_by(.LastKnownUserConnectionTimestamp)'
+
+$ aws workspaces describe-workspaces-connection-status --output json | jq '.WorkspacesConnectionStatus[] | {WorkspaceId, ConnectionState, LastKnownUserConnectionTimestamp: (.LastKnownUserConnectionTimestamp  | strftime("%Y-%m-%d %H:%M:%S UTC"))}'
 ```
 
 - https://aws.amazon.com/solutions/implementations/cost-optimizer-for-amazon-workspaces/
