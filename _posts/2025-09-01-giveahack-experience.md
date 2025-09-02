@@ -118,6 +118,16 @@ Thank everyone involved. This is your chance to show appreciation.
 
 ---
 
+### **The Victory: 2nd Place and Giving Back**
+
+We were thrilled to win **2nd place** in the hackathon! This recognition validated our team's hard work and the impact potential of our Community Connections platform. 
+
+As a team, we decided to donate a portion of our winnings to [Mission House](https://www.missionhousejax.org/), a local Jacksonville Beach non-profit that empowers and compassionately supports neighbors in need. Their mission of helping people achieve stable, healthy, and self-sufficient lives aligns perfectly with our hackathon's goal of fostering community connections and resource allocation.
+
+This donation represents our commitment to not just building solutions during the hackathon, but continuing to support the community we're trying to help.
+
+---
+
 ### **Conclusion: Beyond the Hackathon**
 
 Hackathons are for quickly prototyping a challenge with technical experts. We were proud to contribute. The success is in capturing the thoughts of every team which tackles this problem case and brainstorming to build a product. We're happy to hear this project will continue beyond the hackathon to create impact in the community.
