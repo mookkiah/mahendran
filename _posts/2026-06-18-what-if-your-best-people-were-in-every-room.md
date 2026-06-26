@@ -95,7 +95,7 @@ That last move is the whole philosophy in one line: when the output is bad, **fi
 </p>
 <p style="text-align:center"><em>Humans set direction at the top and accept at the end; agents do the miles in between. When a change is bad, we don't fix the code — we fix the spec.</em></p>
 
-We didn't just make the agents smarter. **We made the organization itself smarter** — a little more every day.
+We didn't just make the agents smarter. **We made the whole organization smarter** — a little more every day.
 
 Your company's real bottleneck was never technology — you can always buy more tools. It was that your sharpest people could only be in one room at a time. That limit is now gone: their judgment can sit beside everyone, everywhere, at once.
 
